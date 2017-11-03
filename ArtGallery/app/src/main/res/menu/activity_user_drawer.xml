@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/category_graphics"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Graphics" />
+        <item
+            android:id="@+id/graphics_linocut"
+            android:title="       linocut"
+            android:visible="false" />
+        <item
+            android:id="@+id/graphics_screen_printing"
+            android:title="       screen printing"
+            android:visible="false" />
+        <item
+            android:id="@+id/graphics_etching"
+            android:title="       etching"
+            android:visible="false" />
+
+
+        <item
+            android:id="@+id/category_painting"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Painting" />
+        <item
+            android:id="@+id/painting_aquarelle"
+            android:title="       aquarelle"
+            android:visible="false" />
+        <item
+            android:id="@+id/painting_oil_painting"
+            android:title="       oil painting"
+            android:visible="false" />
+        <item
+            android:id="@+id/painting_acrylic_painting"
+            android:title="       acrylic painting"
+            android:visible="false" />
+        <item
+            android:id="@+id/painting_charcoal"
+            android:title="       charcoal"
+            android:visible="false" />
+        <item
+            android:id="@+id/painting_pencil_painting"
+            android:title="       pencil painting"
+            android:visible="false" />
+        <item
+            android:id="@+id/painting_pastel"
+            android:title="       pastel"
+            android:visible="false" />
+
+
+        <item
+            android:id="@+id/category_sculpture"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Sculpture" />
+        <item
+            android:id="@+id/sculpture_stone"
+            android:title="       stone"
+            android:visible="false" />
+        <item
+            android:id="@+id/sculpture_metal"
+            android:title="       metal"
+            android:visible="false" />
+        <item
+            android:id="@+id/sculpture_gypsum"
+            android:title="       gypsum"
+            android:visible="false" />
+
+
+        <item
+            android:id="@+id/category_wood_carving"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Wood Carving" />
+        <item
+            android:id="@+id/wood_carving_classic"
+            android:title="       classic wood carving"
+            android:visible="false" />
+        <item
+            android:id="@+id/wood_carving_modern"
+            android:title="       modern carving"
+            android:visible="false" />
+        <item
+            android:id="@+id/wood_carving_interior"
+            android:title="       interior carving"
+            android:visible="false" />
+        <item
+            android:id="@+id/wood_carving_souvenir"
+            android:title="       souvenir woodcarving"
+            android:visible="false" />
+
+
+        <item
+            android:id="@+id/category_ceramics"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Ceramics" />
+        <item
+            android:id="@+id/ceramics_wall_panel"
+            android:title="       wall panel"
+            android:visible="false" />
+        <item
+            android:id="@+id/ceramics_souvenir_ceramics"
+            android:title="       souvenir ceramics"
+            android:visible="false" />
+        <item
+            android:id="@+id/ceramics_household_ceramics"
+            android:title="       household ceramics"
+            android:visible="false" />
+
+
+        <item
+            android:id="@+id/category_glassware"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Glassware" />
+        <item
+            android:id="@+id/glassware_stained_glass"
+            android:title="       stained glass"
+            android:visible="false" />
+        <item
+            android:id="@+id/glassware_household_glass_sculpture"
+            android:title="       household glass sculpture"
+            android:visible="false" />
+        <item
+            android:id="@+id/glassware_souvenir_glass"
+            android:title="       souvenir glass"
+            android:visible="false" />
+        <item
+            android:id="@+id/glassware_jewelery"
+            android:title="       jewelery"
+            android:visible="false" />
+
+
+        <item
+            android:id="@+id/category_textiles"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Textiles" />
+        <item
+            android:id="@+id/textiles_clothes"
+            android:title="       clothes"
+            android:visible="false" />
+        <item
+            android:id="@+id/textiles_accessories"
+            android:title="       accessories"
+            android:visible="false" />
+        <item
+            android:id="@+id/textiles_textile_panel"
+            android:title="       textile panel"
+            android:visible="false" />
+        <item
+            android:id="@+id/textiles_carpets"
+            android:title="       carpets"
+            android:visible="false" />
+
+
+        <item
+            android:id="@+id/category_iconography"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Iconography" />
+        <item
+            android:id="@+id/iconography_new_style"
+            android:title="       new style"
+            android:visible="false" />
+        <item
+            android:id="@+id/iconography_old_style"
+            android:title="       old style"
+            android:visible="false" />
+
+
+        <!--<item-->
+        <!--android:id="@+id/nav_posts"-->
+        <!--android:icon="@drawable/ic_menu_camera"-->
+        <!--android:title="Posts" />-->
+
+        <!--<item-->
+        <!--android:id="@+id/nav_class"-->
+        <!--android:title="Class"-->
+        <!--android:visible="false" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_dept"-->
+        <!--android:title="Department"-->
+        <!--android:visible="false" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_batch"-->
+        <!--android:title="Batch"-->
+        <!--android:visible="false" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_campus"-->
+        <!--android:title="Campus"-->
+        <!--android:visible="false" />-->
+
+
+        <!--<item-->
+        <!--android:id="@+id/nav_walls"-->
+        <!--android:icon="@drawable/ic_menu_gallery"-->
+        <!--android:title="Walls" />-->
+
+        <!--<item-->
+        <!--android:id="@+id/nav_wall_news"-->
+        <!--android:title="News"-->
+        <!--android:visible="false" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_wall_events"-->
+        <!--android:title="Events"-->
+        <!--android:visible="false" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_wall_fun"-->
+        <!--android:title="Fun"-->
+        <!--android:visible="false" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_wall_hadith"-->
+        <!--android:title="Hadith"-->
+        <!--android:visible="false" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_wall_Poetry"-->
+        <!--android:title="Poetry"-->
+        <!--android:visible="false" />-->
+
+
+        <!--<item-->
+        <!--android:id="@+id/nav_com"-->
+        <!--android:title="Communicate">-->
+        <!--<menu>-->
+        <!--<item-->
+        <!--android:id="@+id/nav_share"-->
+        <!--android:title="Share" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_send"-->
+        <!--android:icon="@drawable/ic_menu_send"-->
+        <!--android:title="Send" />-->
+        <!--</menu>-->
+        <!--</item>-->
+    </group>
+</menu>

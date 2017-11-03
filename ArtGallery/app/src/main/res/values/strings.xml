@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Art Gallery B</string>
+    <string name="title_activity_user">UserActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="password">password</string>
+    <string name="mail">е-mail</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="cancel">Cancel</string>
+    <string name="i_agree_to_the">"I agree to the "</string>
+    <string name="registration">Registration</string>
+    <string name="phone_number">phone number</string>
+    <string name="address">address</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="e_mail">e-mail</string>
+    <string name="name">name</string>
+    <string name="YouEnteredAs">"You entered as "</string>
+    <string name="WrongEmailOrPassword">Wrong e-mail or password!</string>
+    <string name="RegistrationCanceled">Registration canceled!</string>
+    <string name="RegistrationSuccess">Registration success!</string>
+    <string name="haveToAgreeTerms">You have to agree Terms and Conditions!</string>
+    <string name="invalidEmail">Email address is invalid!</string>
+    <string name="phoneConditions">Phone number must contains at lest 10 digits!</string>
+    <string name="addAddress">You must add an address to receive the purchases!</string>
+    <string name="invalidPasswordConfirmation">Password don\'t match!</string>
+    <string name="passwordConditions">Password has to be at least 6 characters, contains a digit and an upper letter!</string>
+    <string name="enterName">Please enter your name!</string>
+    <string name="registeredEmail">This e-mail is registered! Enter Another e-mail!</string>
+    <string name="_2017">2017</string>
+    <string name="about_the_project_this_is_the_final_project_in_it_talents_training_camp">About the project: this is the final project in IT Talents training camp</string>
+    <string name="art_gallery_v1_0">Art Gallery V1.0</string>
+    <string name="bulgaria_sofia">Bulgaria, Sofia</string>
+    <string name="nikolai_berov_gmail_com">nikolai.berov@gmail.com</string>
+    <string name="author_nikolai_berov">Author: Nikolai Berov</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_item">ItemActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="wallet">"Wallet "</string>
+    <string name="money">" €"</string>
+    <string name="leaving">Leaving so soon?</string>
+    <string name="sureToLeaving">Are you sure you want to exit Art Gallery?</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="availability">"Availability: "</string>
+    <string-array name="itemTypes">
+        <item>graphics</item>
+        <item>painting</item>
+        <item>sculpture</item>
+        <item>wood carving</item>
+        <item>ceramics</item>
+        <item>glassware</item>
+        <item>textiles</item>
+        <item>iconography</item>
+    </string-array>
+</resources>
