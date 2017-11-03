@@ -1,8 +1,10 @@
 package com.artgallery;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -53,16 +55,20 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
         holder.price.setText("Price: " + String.valueOf(item.getPrice()));
 
 
+        holder.topView.setBackgroundColor(Color.argb(255, 88, 24, 69));
 
-//        Post current = Post.get(position);
-//
-//        holder.txtTitle.setText(current.getTitle());
-//
-//        // add this line
-//        holder.id = Post.get(postion).getId();
-
-
-
+        if (position % 2 == 0) {
+            holder.topView.setBackgroundColor(Color.argb(255, 144, 12, 63));
+        }
+        if (position % 3 == 0) {
+            holder.topView.setBackgroundColor(Color.argb(255, 199, 0, 57));
+        }
+        if (position % 4 == 0) {
+            holder.topView.setBackgroundColor(Color.argb(255, 255, 87, 51));
+        }
+        if (position % 5 == 0) {
+            holder.topView.setBackgroundColor(Color.argb(255, 255, 195, 0));
+        }
 
 
         if (item.getDescription().length() < 40) {
@@ -85,6 +91,7 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
         TextView price;
         TextView title;
         TextView description;
+        View topView;
         private int position;
 
 
@@ -96,12 +103,14 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
             price = (TextView) row.findViewById(R.id.item_row_price);
             title = (TextView) row.findViewById(R.id.item_row_title);
             description = (TextView) row.findViewById(R.id.item_row_description);
-
+            topView = row.findViewById(R.id.item_row_top_view);
 
 
             itemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Util.hideSoftKeyboard((Activity) context);
+                    itemImage.requestFocus();
                     Toast.makeText(context, "dsadsadasdsa " + price.getText().toString(), Toast.LENGTH_SHORT).show();
                 }
             });

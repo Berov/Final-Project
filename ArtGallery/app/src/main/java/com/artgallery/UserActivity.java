@@ -102,14 +102,14 @@ public class UserActivity extends AppCompatActivity
         topView.requestFocus();
         Util.hideSoftKeyboard(UserActivity.this);
 
-//        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                recyclerView.requestFocus();
-//                Util.hideSoftKeyboard(UserActivity.this);
-//                return false;
-//            }
-//        });
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                recyclerView.requestFocus();
+                Util.hideSoftKeyboard(UserActivity.this);
+                return false;
+            }
+        });
 
         topView.setOnTouchListener(new View.OnTouchListener() {
             @Override

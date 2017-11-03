@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -51,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerLayout = findViewById(R.id.register_scroll_view);
         topView = findViewById(R.id.register_layout);
 
-        topView.setPadding(Util.getScreenWidth()/10,0,Util.getScreenWidth()/10,0);
+        topView.setPadding(Util.getScreenWidth() / 10, 0, Util.getScreenWidth() / 10, 0);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +128,21 @@ public class RegisterActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+//        topView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Util.hideSoftKeyboard(RegisterActivity.this);
+//            }
+//        });
+
+//        topView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                Util.hideSoftKeyboard(RegisterActivity.this);
+//                return false;
+//            }
+//        });
     }
 
     @Override
