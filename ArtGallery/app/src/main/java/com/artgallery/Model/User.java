@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Berov on 28.10.2017 г..
@@ -86,10 +88,14 @@ public class User implements Serializable {
         return soldItems;
     }
 
-    public ArrayList<Item> getBoughtItems() {
-        return boughtItems;
+    public List<Item> getBoughtItems() {
+        return Collections.unmodifiableList(boughtItems);
+//        return boughtItems;
     }
 
+    public void addNewItem(Item newItem){
+        boughtItems.add(newItem);
+    }
 
     public void setAdmin(boolean b) {
         this.isAdmin = b;

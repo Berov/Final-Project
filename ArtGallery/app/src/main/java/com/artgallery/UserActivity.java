@@ -385,7 +385,7 @@ public class UserActivity extends AppCompatActivity
 
     private void getItemBySubtype(String subtype) {
 
-        ArrayList<Item> items = DBManager.getInstance(this).getItemsBySubtype(subtype);
+        ArrayList<Item> items = DBManager.getInstance(this).getItemsBySubtype(subtype, user.getId());
 
         if (items.size() == 0 || items.isEmpty()) {
             wellcome.setVisibility(View.VISIBLE);
@@ -395,11 +395,11 @@ public class UserActivity extends AppCompatActivity
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items));
+        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
     private void getAllItems() {
-        ArrayList<Item> items = DBManager.getInstance(this).getAllItems();
+        ArrayList<Item> items = DBManager.getInstance(this).getAllItems(user.getId());
 
         if (items.size() == 0 || items.isEmpty()) {
             wellcome.setVisibility(View.VISIBLE);
@@ -409,11 +409,11 @@ public class UserActivity extends AppCompatActivity
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items));
+        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
     private void getItemsBySearchWord(String search) {
-        ArrayList<Item> items = DBManager.getInstance(this).getItemsBySearchWord(search);
+        ArrayList<Item> items = DBManager.getInstance(this).getItemsBySearchWord(search, user.getId());
 
         if (items.size() == 0 || items.isEmpty()) {
             wellcome.setVisibility(View.VISIBLE);
@@ -423,6 +423,6 @@ public class UserActivity extends AppCompatActivity
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items));
+        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 }

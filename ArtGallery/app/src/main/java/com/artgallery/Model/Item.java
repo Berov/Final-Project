@@ -29,8 +29,8 @@ public class Item implements Serializable {
         this.subtype_id = subtype_id;
     }
 
-    public Item(int id,int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture){
-        this(subtype_id, title, description, price, author, owner_id,picture);
+    public Item(int id, int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture) {
+        this(subtype_id, title, description, price, author, owner_id, picture);
         this.id = id;
     }
 
@@ -74,5 +74,9 @@ public class Item implements Serializable {
     public Bitmap getImage() {
 //        Bitmap bm = BitmapFactory.decodeByteArray(picture, 0, picture.length);
         return BitmapFactory.decodeByteArray(picture, 0, picture.length);
+    }
+
+    public void setOwnerID(int newOwnerID) {
+        owner_id = newOwnerID;
     }
 }

@@ -3,18 +3,24 @@ package com.artgallery;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.artgallery.Model.DBManager;
 import com.artgallery.Model.Item;
+import com.artgallery.Model.User;
 import com.artgallery.Util.Util;
 
 import java.util.List;
@@ -27,10 +33,13 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
 
     private List<Item> items;
     private Context context;
+    private User user;
 
-    public UserRecycleViewAdapter(Context context, List<Item> items) {
+    UserRecycleViewAdapter(Context context, List<Item> items, User user) {
         this.context = context;
         this.items = items;
+        this.user = user;
+
     }
 
     @Override
@@ -47,7 +56,7 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
     public void onBindViewHolder(VH holder, int position) {
 
 
-        Item item = items.get(position);
+        final Item item = items.get(position);
 
 
         holder.itemImage.setImageBitmap(item.getImage());
@@ -76,6 +85,92 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
         } else {
             holder.description.setText("Description: " + item.getDescription().substring(0, 40) + "...");
         }
+
+
+        holder.itemImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Util.hideSoftKeyboard((Activity) context);
+
+
+                AlertDialog.Builder alertDialogWantToBuy = new AlertDialog.Builder(context);
+
+                LinearLayout showFullItem = new LinearLayout(context);
+
+
+                TextView title = new TextView(context);
+                TextView price = new TextView(context);
+                TextView author = new TextView(context);
+                TextView description = new TextView(context);
+                ImageView image = new ImageView(context);
+
+                title.setText("Title:  " + item.getTitle());
+                price.setText("Price:  " + String.valueOf(item.getPrice()) + "€");
+
+                if (!item.getAuthor().isEmpty() && item.getAuthor() != null) {
+                    author.setText("Author: " + item.getAuthor());
+                }
+                image.setImageBitmap(item.getImage());
+                image.setMinimumHeight(Util.getScreenWidth() / 10 * 7);
+                image.setMaxHeight(Util.getScreenWidth() / 10 * 7);
+                image.setPadding(8, 8, 8, 8);
+                description.setText("Description: \n" + item.getDescription());
+
+
+                showFullItem.setOrientation(LinearLayout.VERTICAL);
+                showFullItem.setGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
+                showFullItem.setPadding(16, 8, 16, 8);
+                showFullItem.addView(title);
+                showFullItem.addView(price);
+                showFullItem.addView(author);
+                showFullItem.addView(image);
+                showFullItem.addView(description);
+
+                alertDialogWantToBuy
+                        .setView(showFullItem)
+                        .setMessage("Do you want to buy this item?")
+                        .setCancelable(true)
+//                        .setView(item.getImage())
+
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                int oldOwnerID = item.getOwnerID();
+                                item.setOwnerID(user.getId());
+                                user.addNewItem(item);
+                                DBManager.getInstance(context).updateItem(item);
+                                DBManager.getInstance(context).notifyOldOwnerForSoldItem(oldOwnerID);
+
+                                AlertDialog.Builder alertDialogBuy = new AlertDialog.Builder(context);
+                                alertDialogBuy
+                                        .setCancelable(true)
+                                        .setMessage("Congratulations!\n\nYou just bought the \"" + item.getTitle() + "\" just for " + item.getPrice() + "€");
+                                AlertDialog alertDialog2 = alertDialogBuy.create();
+                                alertDialog2.show();
+
+
+                            }
+
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogWantToBuy.create();
+
+                // show it
+                alertDialog.show();
+
+
+            }
+        });
+
+
     }
 
 
@@ -92,10 +187,8 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
         TextView title;
         TextView description;
         View topView;
-        private int position;
 
-
-        public VH(View row) {
+        private VH(View row) { //or public?
             super(row);
 
             this.row = row;
@@ -106,12 +199,17 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
             topView = row.findViewById(R.id.item_row_top_view);
 
 
+//            Layout l = R.layout.item_view_full_description_for_sale.
+
+
             itemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Util.hideSoftKeyboard((Activity) context);
                     itemImage.requestFocus();
-                    Toast.makeText(context, "dsadsadasdsa " + price.getText().toString(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "dsadsadasdsa " + price.getText().toString(), Toast.LENGTH_SHORT).show();
+
+
                 }
             });
 
