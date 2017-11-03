@@ -67,9 +67,9 @@
         android:text="@string/register"
         android:textAllCaps="false" />
 
-    <!--<pl.droidsonroids.gif.GifTextView-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:background="@drawable/gif" />-->
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/gif" />
 
 </LinearLayout><!--</ScrollView>-->
