@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                     String setPhone = phoneNumber.getText().toString();
                     String setAddress = address.getText().toString();
 
-                    User u = new User(setName, setEmail, setPassword, setPhone, setAddress, 0);
+                    User u = new User(setName, setEmail, setPassword, setPhone, setAddress, 0,0);
                     DBManager.getInstance(RegisterActivity.this).addUser(u);
                     Toast.makeText(RegisterActivity.this, R.string.RegistrationSuccess, Toast.LENGTH_SHORT).show();
 

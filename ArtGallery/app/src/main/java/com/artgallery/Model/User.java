@@ -2,6 +2,8 @@ package com.artgallery.Model;
 
 import android.graphics.Bitmap;
 
+import com.artgallery.Util.Util;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +23,7 @@ public class User implements Serializable {
     private byte[] userImageBytes = null;
     private String address;
     private boolean isAdmin = false;
+    private boolean hasNewSale = false;
     private ArrayList<Item> itemsForSale;
     private ArrayList<Item> soldItems;
     private ArrayList<Item> boughtItems;
@@ -31,7 +34,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(String name, String email, String password, String phoneNumber, String address, double wallet) {
+    public User(String name, String email, String password, String phoneNumber, String address, double wallet, int hasNewSaleAsInteger) {
         //TODO validations
         this(email, password);
         this.name = name;
@@ -42,6 +45,11 @@ public class User implements Serializable {
         this.itemsForSale = new ArrayList<>();
         this.soldItems = new ArrayList<>();
         this.boughtItems = new ArrayList<>();
+        this.hasNewSale = false;
+
+        if (hasNewSaleAsInteger != 0) {
+            this.hasNewSale = true;
+        }
     }
 
     public String getName() {
@@ -57,7 +65,9 @@ public class User implements Serializable {
     }
 
     public double getWallet() {
-        return wallet;
+
+
+        return Util.twoDecimalPlaces(wallet);
     }
 
     public String getPhoneNumber() {
@@ -80,20 +90,19 @@ public class User implements Serializable {
         return this.userImageBytes;
     }
 
-    public ArrayList<Item> getItemsForSale() {
-        return itemsForSale;
+    public List<Item> getItemsForSale() {
+        return Collections.unmodifiableList(itemsForSale);
     }
 
-    public ArrayList<Item> getSoldItems() {
-        return soldItems;
+    public List<Item> getSoldItems() {
+        return Collections.unmodifiableList(soldItems);
     }
 
     public List<Item> getBoughtItems() {
         return Collections.unmodifiableList(boughtItems);
-//        return boughtItems;
     }
 
-    public void addNewItem(Item newItem){
+    public void addNewItem(Item newItem) {
         boughtItems.add(newItem);
     }
 
@@ -125,17 +134,17 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public void setItemsForSale(ArrayList<Item> itemsForSale) {
-        this.itemsForSale = itemsForSale;
-    }
-
-    public void setSoldItems(ArrayList<Item> soldItems) {
-        this.soldItems = soldItems;
-    }
-
-    public void setBoughtItems(ArrayList<Item> boughtItems) {
-        this.boughtItems = boughtItems;
-    }
+//    public void setItemsForSale(ArrayList<Item> itemsForSale) {
+//        this.itemsForSale = itemsForSale;
+//    }
+//
+//    public void setSoldItems(ArrayList<Item> soldItems) {
+//        this.soldItems = soldItems;
+//    }
+//
+//    public void setBoughtItems(ArrayList<Item> boughtItems) {
+//        this.boughtItems = boughtItems;
+//    }
 
     public void setUserImageBytes(byte[] userImageBytes) {
         this.userImageBytes = userImageBytes;
@@ -143,6 +152,24 @@ public class User implements Serializable {
 
     public void addItemForSale(Item item) {
         itemsForSale.add(item);
+    }
+
+    public void setSaleFlag(boolean saleFlag) {
+        this.hasNewSale = saleFlag;
+    }
+
+    public boolean getSaleFlag() {
+        return hasNewSale;
+    }
+
+    public int getSaleFlagAsInteger() {
+
+        int flag = 0;
+
+        if (hasNewSale) {
+            flag = 1;
+        }
+        return flag;
     }
 }
 

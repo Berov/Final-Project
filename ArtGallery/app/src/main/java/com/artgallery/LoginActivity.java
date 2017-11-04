@@ -37,31 +37,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         topView.setPadding(Util.getScreenWidth()/10,Util.getScreenHeight()/10,Util.getScreenWidth()/10,Util.getScreenHeight()/10);
-//
-//        350
-//        down vote
-//        accepted
-//        view.setPadding(0,padding,0,0);
-//
-//
+
         logo.getLayoutParams().height = Util.getScreenHeight() / 8;
-//        email.getLayoutParams().width = Util.getScreenWidth()/10*9;
-
-//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-//        params.gravity = Gravity.CENTER;
-
-//        ((EditText)email).setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-
-
-//        password.getLayoutParams().width = Util.getScreenWidth()/10*9;
-
-//        image_view.getLayoutParams().height = 20;
-//        Hope this helps.
-//
-//                Important.If you 're setting the height after the layout has already been ' laid out
-//        ', make sure you also call:
-//
-//        image_view.requestLayout()
 
 
         register.setOnClickListener(new View.OnClickListener() {

@@ -13,6 +13,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
 
+import com.artgallery.Model.DBManager;
+import com.artgallery.Model.User;
 import com.artgallery.R;
 
 import java.io.ByteArrayOutputStream;
@@ -23,6 +25,14 @@ import java.text.DecimalFormat;
  */
 
 public class Util {
+
+    public static int GALLERY_PERCENT = 20;
+
+    public static void addGalleryMoney(double money, Context context) {
+        User admin = DBManager.getInstance(context).getUserByID(1); //static added admins ID
+        admin.setWallet(twoDecimalPlaces(admin.getWallet() + money));
+        DBManager.getInstance(context).updateUser(admin);
+    }
 
     public static double twoDecimalPlaces(double money) {
         DecimalFormat df = new DecimalFormat("#.##");

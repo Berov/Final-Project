@@ -41,7 +41,7 @@ import com.artgallery.Util.Util;
 import java.util.ArrayList;
 
 public class UserActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, UserRecycleViewAdapter.BuyDialogClicked {
 
     private static final int CHANGE_PROFILE = 2;
     private static final int UPDATE_WALLET = 4;
@@ -96,7 +96,12 @@ public class UserActivity extends AppCompatActivity
         }
 
         userName.setText(user.getName());
-        userEmail.setText(user.getEmail());
+        if (user.isAdmin()) {
+            userEmail.setText("You are the Admin");
+        } else {
+            userEmail.setText(user.getEmail());
+        }
+
         userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
 
         topView.requestFocus();
@@ -135,6 +140,15 @@ public class UserActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getAllItems();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        userName.setText(user.getName());
+//        userEmail.setText(user.getEmail());
+        userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
     }
 
 
@@ -255,6 +269,7 @@ public class UserActivity extends AppCompatActivity
         NavigationView nv = (NavigationView) findViewById(R.id.nav_view);
         Menu m = nv.getMenu();
         int id = item.getItemId();
+        setRecyclerViewVisible();
 
         if (id == R.id.category_graphics) {
             boolean b = !m.findItem(R.id.graphics_linocut).isVisible();
@@ -391,7 +406,7 @@ public class UserActivity extends AppCompatActivity
             wellcome.setVisibility(View.VISIBLE);
             wellcome.setText("\n\n\nSorry!\nThere are no items in this category.");
         } else {
-            wellcome.setVisibility(View.GONE);
+            setRecyclerViewVisible();
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -405,7 +420,7 @@ public class UserActivity extends AppCompatActivity
             wellcome.setVisibility(View.VISIBLE);
             wellcome.setText("\n\n\nSorry!\nThere are no items for sale.");
         } else {
-            wellcome.setVisibility(View.GONE);
+            setRecyclerViewVisible();
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -419,10 +434,27 @@ public class UserActivity extends AppCompatActivity
             wellcome.setVisibility(View.VISIBLE);
             wellcome.setText("\n\n\nSorry!\nThere are no matches in this search!");
         } else {
-            wellcome.setVisibility(View.GONE);
+            setRecyclerViewVisible();
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
+
+
+    @Override
+    public void newWalletSum() {
+        userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
+
+        recyclerView.setVisibility(View.GONE);
+        wellcome.setVisibility(View.VISIBLE);
+        wellcome.setText("\n\n\nYour Wallet:\nNow you have: " + String.valueOf(user.getWallet()) + " Euro in your wallet!\nWant to buy anything more?");
+    }
+
+    private void setRecyclerViewVisible() {
+        recyclerView.setVisibility(View.VISIBLE);
+        wellcome.setVisibility(View.GONE);
+    }
+
+
 }

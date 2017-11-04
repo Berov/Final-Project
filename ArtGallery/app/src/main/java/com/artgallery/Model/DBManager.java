@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -125,9 +126,6 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_PUT_ADMIN);
         sqLiteDatabase.execSQL(SQL_PUT_TYPES);
         sqLiteDatabase.execSQL(SQL_PUT_SUBTYPES);
-
-        Toast.makeText(context, "DB Created!", Toast.LENGTH_SHORT).show();//TODO remove it
-        Toast.makeText(context, "Admin added!!", Toast.LENGTH_SHORT).show();//TODO remove it
     }
 
     @Override
@@ -174,6 +172,8 @@ public class DBManager extends SQLiteOpenHelper {
         values.put("password", u.getPassword());
         values.put("address", u.getAddress());
         values.put("phone", u.getPhoneNumber());
+        values.put("flag_sold", u.getSaleFlagAsInteger());
+        values.put("wallet", u.getWallet());
 
         if (u.getUserImageBytes() != null) {
             byte[] data = u.getUserImageBytes();
@@ -184,7 +184,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     public void deleteUser(User u) {
-        //TODO if necessary
+        //TODO later
     }
 
     public boolean isValidLogin(String email, String password) {
@@ -222,7 +222,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     public User getUser(String enteringEmail, String enteringPassword) {
-        User registeredUser = null;
+//        User registeredUser = null;
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT  id, email, password FROM Users", null);
         Integer id = null;
 
@@ -236,7 +236,41 @@ public class DBManager extends SQLiteOpenHelper {
             }
         }
 
-        cursor = ourInstance.getWritableDatabase().rawQuery("SELECT email, password, name, address, phone,image,wallet, isAdmin FROM Users WHERE id=?", new String[]{id + ""});
+        cursor.close();
+        return getUserByID(id);
+//
+//        cursor = ourInstance.getWritableDatabase().rawQuery("SELECT email, password, name, address, phone,image,wallet, isAdmin FROM Users WHERE id=?", new String[]{id + ""});
+//
+//        if (cursor.getCount() > 0) {
+//            cursor.moveToFirst();
+//        }
+//
+//        String name = cursor.getString(cursor.getColumnIndex("name"));
+//        double wallet = cursor.getDouble(cursor.getColumnIndex("wallet"));
+//        String email = cursor.getString(cursor.getColumnIndex("email"));
+//        String password = cursor.getString(cursor.getColumnIndex("password"));
+//        String phone = cursor.getString(cursor.getColumnIndex("phone"));
+//        String address = cursor.getString(cursor.getColumnIndex("address"));
+//        byte[] image = cursor.getBlob(cursor.getColumnIndex("image"));
+//        int flagSold = cursor.getInt(cursor.getColumnIndex("flag_sold"));
+//
+//        registeredUser = new User(name, email, password, phone, address, wallet, flagSold);
+//        registeredUser.setId(id);
+//        registeredUser.setUserImageBytes(image);
+//
+//        if (cursor.getInt(cursor.getColumnIndex("isAdmin")) == 1) {
+//            registeredUser.setAdmin(true);
+//        }
+//
+//        cursor.close();
+//        return registeredUser;
+    }
+
+
+    public User getUserByID(Integer userID) {
+
+        User user = null;
+        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT email, password, name, address, phone, image ,wallet, flag_sold, isAdmin FROM Users WHERE id=?", new String[]{userID + ""});
 
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -249,18 +283,21 @@ public class DBManager extends SQLiteOpenHelper {
         String phone = cursor.getString(cursor.getColumnIndex("phone"));
         String address = cursor.getString(cursor.getColumnIndex("address"));
         byte[] image = cursor.getBlob(cursor.getColumnIndex("image"));
+        int flagSold = cursor.getInt(cursor.getColumnIndex("flag_sold"));
+        int isAdmin = cursor.getInt(cursor.getColumnIndex("isAdmin"));
 
-        registeredUser = new User(name, email, password, phone, address, wallet);
-        registeredUser.setId(id);
-        registeredUser.setUserImageBytes(image);
+        user = new User(name, email, password, phone, address, wallet, flagSold);
+        user.setId(userID);
+        user.setUserImageBytes(image);
 
-        if (cursor.getInt(cursor.getColumnIndex("isAdmin")) == 1) {
-            registeredUser.setAdmin(true);
+        if (isAdmin == 1) {
+            user.setAdmin(true);
         }
 
         cursor.close();
-        return registeredUser;
+        return user;
     }
+
 
     public int addNewItem(Item item) {
 
@@ -412,18 +449,21 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     public void updateItem(Item item) {
-        ContentValues values = new ContentValues();
-        values.put("owner_id", item.getOwnerID());
-        getWritableDatabase().update("Items", values, "id=" + item.getId(), null);
+
+        new AsyncTask<Item, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Item... items) {
+                Item item = items[0];
+                ContentValues values = new ContentValues();
+                values.put("owner_id", item.getOwnerID());
+                getWritableDatabase().update("Items", values, "id=" + item.getId(), null);
+                return null;
+            }
+        }.execute(item);
     }
 
-    public void notifyOldOwnerForSoldItem(int oldOwnerID) {
-        ContentValues values = new ContentValues();
-        values.put("flag_sold", 1);
-        getWritableDatabase().update("Users", values, "id=" + oldOwnerID, null);
-    }
-
-    public void soldSeen(int ownerID) {
+    public void soldSeen(int ownerID) {// ??????????????????????????????????????????????????????????????????
         ContentValues values = new ContentValues();
         values.put("flag_sold", 0);
         getWritableDatabase().update("Users", values, "id=" + ownerID, null);

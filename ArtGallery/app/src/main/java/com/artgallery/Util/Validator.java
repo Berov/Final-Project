@@ -12,7 +12,7 @@ import java.io.ByteArrayOutputStream;
 public class Validator {
 
     public static boolean isValidName(String name) {
-//        String pattern = "^[\\p\\{L\\}\\s.’\\-,]+$"; Test it!!!--------------------------------------------------------------------
+//        String pattern = "^[\\p\\{L\\}\\s.’\\-,]+$"; Test it!!!
         String pattern = "[a-zA-Zа-яА-Я][a-zA-Zа-яА-Я ][a-zA-Zа-яА-Я][a-zA-Zа-яА-Я ]*";
         return name.matches(pattern);
     }
