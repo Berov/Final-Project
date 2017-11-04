@@ -24,9 +24,11 @@ public class User implements Serializable {
     private String address;
     private boolean isAdmin = false;
     private boolean hasNewSale = false;
-    private ArrayList<Item> itemsForSale;
-    private ArrayList<Item> soldItems;
-    private ArrayList<Item> boughtItems;
+//    private ArrayList<Item> itemsForSale;
+//    private ArrayList<Item> soldItems;
+//    private ArrayList<Item> boughtItems;
+
+    private ArrayList<Item> userItems;
     private int id;
 
     public User(String email, String password) {
@@ -42,9 +44,10 @@ public class User implements Serializable {
         this.address = address;
         this.isAdmin = false;
         this.wallet = wallet;
-        this.itemsForSale = new ArrayList<>();
-        this.soldItems = new ArrayList<>();
-        this.boughtItems = new ArrayList<>();
+//        this.itemsForSale = new ArrayList<>();
+//        this.soldItems = new ArrayList<>();
+//        this.boughtItems = new ArrayList<>();
+        this.userItems = new ArrayList<>();
         this.hasNewSale = false;
 
         if (hasNewSaleAsInteger != 0) {
@@ -65,8 +68,6 @@ public class User implements Serializable {
     }
 
     public double getWallet() {
-
-
         return Util.twoDecimalPlaces(wallet);
     }
 
@@ -90,20 +91,21 @@ public class User implements Serializable {
         return this.userImageBytes;
     }
 
-    public List<Item> getItemsForSale() {
-        return Collections.unmodifiableList(itemsForSale);
-    }
-
-    public List<Item> getSoldItems() {
-        return Collections.unmodifiableList(soldItems);
-    }
-
-    public List<Item> getBoughtItems() {
-        return Collections.unmodifiableList(boughtItems);
-    }
+//    public List<Item> getItemsForSale() {
+//        return Collections.unmodifiableList(itemsForSale);
+//    }
+//
+//    public List<Item> getSoldItems() {
+//        return Collections.unmodifiableList(soldItems);
+//    }
+//
+//    public List<Item> getBoughtItems() {
+//        return Collections.unmodifiableList(boughtItems);
+//    }
 
     public void addNewItem(Item newItem) {
-        boughtItems.add(newItem);
+        userItems.add(newItem);
+//        boughtItems.add(newItem);
     }
 
     public void setAdmin(boolean b) {
@@ -150,8 +152,12 @@ public class User implements Serializable {
         this.userImageBytes = userImageBytes;
     }
 
-    public void addItemForSale(Item item) {
-        itemsForSale.add(item);
+//    public void addItemForSale(Item item) {
+//        itemsForSale.add(item);
+//    }
+
+    public void addItem(Item item) {
+        userItems.add(item);
     }
 
     public void setSaleFlag(boolean saleFlag) {

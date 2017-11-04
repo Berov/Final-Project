@@ -4,49 +4,63 @@
 
     <item
         android:id="@+id/action_item"
-        android:orderInCategory="101"
+        android:icon="@drawable/ic_photo_black_24dp"
+        android:orderInCategory="104"
         android:title="Items"
-        app:showAsAction="never"/>
-        <!--&lt;!&ndash;<menu>&ndash;&gt;-->
-            <!--&lt;!&ndash;<item&ndash;&gt;-->
-                <!--&lt;!&ndash;android:id="@+id/action_items_for_sell"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:orderInCategory="102"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:title="Add item for sell"&ndash;&gt;-->
-                <!--&lt;!&ndash;app:showAsAction="never" />&ndash;&gt;-->
+        app:showAsAction="always" />
 
-            <!--&lt;!&ndash;<item&ndash;&gt;-->
-                <!--&lt;!&ndash;android:id="@+id/action_sold_items"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:orderInCategory="102"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:title="Sold items"&ndash;&gt;-->
-                <!--&lt;!&ndash;app:showAsAction="never" />&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<item&ndash;&gt;-->
-                <!--&lt;!&ndash;android:id="@+id/action_bought_items"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:orderInCategory="102"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:title="Bought items"&ndash;&gt;-->
-                <!--&lt;!&ndash;app:showAsAction="never" />&ndash;&gt;-->
-        <!--&lt;!&ndash;</menu>&ndash;&gt;-->
-    <!--</item>-->
 
     <item
-        android:id="@+id/action_search"
-        android:icon="?android:attr/actionModeWebSearchDrawable"
-        android:orderInCategory="102"
-
+        android:id="@+id/action_search_view"
+        android:icon="@drawable/ic_search_black_24dp"
         android:title="Search"
-        app:showAsAction="always" />
+        android:orderInCategory="101"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always|collapseActionView">
+
+    </item>
+    <!--&lt;!&ndash;<menu>&ndash;&gt;-->
+    <!--&lt;!&ndash;<item&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/action_items_for_sell"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orderInCategory="102"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:title="Add item for sell"&ndash;&gt;-->
+    <!--&lt;!&ndash;app:showAsAction="never" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<item&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/action_sold_items"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orderInCategory="102"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:title="Sold items"&ndash;&gt;-->
+    <!--&lt;!&ndash;app:showAsAction="never" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<item&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/action_bought_items"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orderInCategory="102"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:title="Bought items"&ndash;&gt;-->
+    <!--&lt;!&ndash;app:showAsAction="never" />&ndash;&gt;-->
+    <!--&lt;!&ndash;</menu>&ndash;&gt;-->
+    <!--</item>-->
+
+
+    <!--<item-->
+        <!--android:id="@+id/action_search"-->
+        <!--android:icon="@drawable/ic_search_black_24dp"-->
+        <!--android:orderInCategory="102"-->
+        <!--android:title="Search"-->
+
+        <!--app:showAsAction="always" />-->
 
     <item
         android:id="@+id/action_profile"
+        android:icon="@drawable/ic_account_box_black_24dp"
         android:orderInCategory="103"
         android:title="Profile"
-        app:showAsAction="never" />
-
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_wallet"
+        android:icon="@drawable/ic_wallet_black_24dp"
         android:orderInCategory="104"
         android:title="Wallet"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_about"

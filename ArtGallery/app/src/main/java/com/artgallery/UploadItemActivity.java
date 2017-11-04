@@ -214,13 +214,6 @@ public class UploadItemActivity extends AppCompatActivity {
     private void uploadItem() {
 
         if (isValidNewItem()) {
-//            Log.e("vlado","" + getSubtypeID());
-//            Log.e("vlado","" + title.getText().toString());
-//            Log.e("vlado","" + description.getText().toString());
-//            Log.e("vlado","" +  Util.twoDecimalPlaces(Double.parseDouble(price.getText().toString())));
-//            Log.e("vlado","" + author.getText().toString());
-//            Log.e("vlado","" + user.getId());
-//            Log.e("vlado","" + imageAsBytesArray);
 
             Item newItem = new Item(getSubtypeID(),
                     title.getText().toString(),
@@ -228,7 +221,8 @@ public class UploadItemActivity extends AppCompatActivity {
                     Util.twoDecimalPlaces(Double.parseDouble(price.getText().toString())),
                     author.getText().toString(),
                     user.getId(),
-                    imageAsBytesArray);
+                    imageAsBytesArray,
+                    "F"); // F - for sale, S - sold, B- bough
 
             int imageID = DBManager.getInstance(this).addNewItem(newItem);
 
@@ -236,7 +230,7 @@ public class UploadItemActivity extends AppCompatActivity {
                 Toast.makeText(this, "The new item is uploaded for sale.", Toast.LENGTH_SHORT).show();
 
                 newItem.setId(imageID);
-                user.addItemForSale(newItem);
+                user.addNewItem(newItem);
 
                 setResult(RESULT_OK);
                 finish();
@@ -317,7 +311,7 @@ public class UploadItemActivity extends AppCompatActivity {
 
         boolean isValid = true;
 
-        if (price.getText().toString().isEmpty() || Double.parseDouble(price.getText().toString()) < 0) {
+        if (price.getText().toString().isEmpty() || Double.parseDouble(price.getText().toString()) <= 0) {
             isValid = false;
         } else {
             price.setText(String.valueOf(Util.twoDecimalPlaces(Double.parseDouble(price.getText().toString()))));

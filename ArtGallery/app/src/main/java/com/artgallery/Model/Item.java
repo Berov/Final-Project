@@ -16,10 +16,11 @@ public class Item implements Serializable {
     private String author;
     private int owner_id;
     private int subtype_id;
+    private String flag_status;
     private int id;
     private byte[] picture;
 
-    public Item(int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture) {
+    public Item(int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture, String status) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -27,10 +28,11 @@ public class Item implements Serializable {
         this.owner_id = owner_id;
         this.picture = picture;
         this.subtype_id = subtype_id;
+        this.flag_status = status;
     }
 
-    public Item(int id, int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture) {
-        this(subtype_id, title, description, price, author, owner_id, picture);
+    public Item(int id, int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture, String status) {
+        this(subtype_id, title, description, price, author, owner_id, picture, status);
         this.id = id;
     }
 
@@ -78,5 +80,9 @@ public class Item implements Serializable {
 
     public void setOwnerID(int newOwnerID) {
         owner_id = newOwnerID;
+    }
+
+    public String getImageStatus(){
+        return  flag_status;
     }
 }

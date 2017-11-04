@@ -19,6 +19,8 @@ import com.artgallery.R;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * Created by Berov on 28.10.2017 г..
@@ -35,8 +37,11 @@ public class Util {
     }
 
     public static double twoDecimalPlaces(double money) {
-        DecimalFormat df = new DecimalFormat("#.##");
-        return Double.parseDouble(df.format(money));
+//        DecimalFormat df = new DecimalFormat("#.##");
+//        NumberFormat.getNumberInstance(Locale.GERMAN);
+//        return Double.parseDouble(df.format(money));
+
+        return (double) Math.round(money * 100) / 100;
     }
 
     public static int getScreenWidth() {

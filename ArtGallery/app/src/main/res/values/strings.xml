@@ -49,6 +49,13 @@
     <string name="Yes">Yes</string>
     <string name="No">No</string>
     <string name="availability">"Availability: "</string>
+    <string name="wallet_updated">Your wallet is updated!</string>
+    <string name="sorry_no_items">Sorry! There are no items in this category.</string>
+    <string name="you_are_admin">You are the Admin</string>
+    <string name="no_items_for_sale">Sorry! There are no items for sale.</string>
+    <string name="no_searched_items">Sorry! There are no matches in this search!</string>
+    <string name="you_have_in_your_wallet">Your Wallet: Now you have:</string>
+    <string name="you_have_in_your_wallet_end">Euro in your wallet! Want to buy anything more?</string>
     <string-array name="itemTypes">
         <item>graphics</item>
         <item>painting</item>

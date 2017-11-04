@@ -10,9 +10,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -53,11 +55,12 @@ public class UserActivity extends AppCompatActivity
     private TextView userEmail;
     private TextView about;
     private TextView userWallet;
-    private EditText search;
+//    private EditText search;
     private PopupWindow popupWindow;
     private LayoutInflater layoutInflater;
     private View topView;
     private RecyclerView recyclerView;
+//    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +81,8 @@ public class UserActivity extends AppCompatActivity
         userImage = (ImageView) v.findViewById(R.id.nav_header_image);
         topView = findViewById(R.id.content_user_parent_layout);
         recyclerView = (RecyclerView) findViewById(R.id.content_user_recycler_view);
-        search = (EditText) findViewById(R.id.search_edit_text);
+//        search = (EditText) findViewById(R.id.search_edit_text);
+//        searchView = (SearchView) findViewById(R.id.search_view);
 
 
         if (user.getUserImageBytes() != null) {
@@ -97,7 +101,7 @@ public class UserActivity extends AppCompatActivity
 
         userName.setText(user.getName());
         if (user.isAdmin()) {
-            userEmail.setText("You are the Admin");
+            userEmail.setText(R.string.you_are_admin);
         } else {
             userEmail.setText(user.getEmail());
         }
@@ -140,6 +144,31 @@ public class UserActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getAllItems();
+
+
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//
+//
+////                searchView.setIconifeid(true);
+////                searchView.invokeClose();
+//                searchView.setIconified(true);
+//                getItemsBySearchWord(query);
+//
+////                search.setText("");
+//                Util.hideSoftKeyboard(UserActivity.this);
+//
+//                topView.requestFocus();
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
     }
 
     @Override
@@ -203,8 +232,33 @@ public class UserActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.user, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.action_search_view);
+        final SearchView search = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                getItemsBySearchWord(query);
+                MenuItemCompat.collapseActionView(searchItem);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+
         return true;
     }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -220,17 +274,17 @@ public class UserActivity extends AppCompatActivity
             startActivityForResult(intent, ITEM_ACTIVITY);
         }
 
-        if (id == R.id.action_settings) {
-//            Intent intent = new Intent(UserActivity.this, SettingsActivity.class);//nbnbnnbnbbnbbnbnbnbbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbn
-//            startActivity(intent);
-        }
-
-        if (id == R.id.action_search) {
-            getItemsBySearchWord(search.getText().toString());
-            search.setText("");
-            Util.hideSoftKeyboard(this);
-            topView.requestFocus();
-        }
+//        if (id == R.id.action_settings) {
+////            Intent intent = new Intent(UserActivity.this, SettingsActivity.class);//nbnbnnbnbbnbbnbnbnbbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbn
+////            startActivity(intent);
+//        }
+//
+//        if (id == R.id.action_search) {
+//            getItemsBySearchWord(search.getText().toString());
+//            search.setText("");
+//            Util.hideSoftKeyboard(this);
+//            topView.requestFocus();
+//        }
 
         if (id == R.id.action_wallet) {
             Intent intent = new Intent(UserActivity.this, WalletActivity.class);//change it
@@ -269,7 +323,7 @@ public class UserActivity extends AppCompatActivity
         NavigationView nv = (NavigationView) findViewById(R.id.nav_view);
         Menu m = nv.getMenu();
         int id = item.getItemId();
-        setRecyclerViewVisible();
+//        setRecyclerViewVisible();
 
         if (id == R.id.category_graphics) {
             boolean b = !m.findItem(R.id.graphics_linocut).isVisible();
@@ -304,12 +358,16 @@ public class UserActivity extends AppCompatActivity
             Util.magic(m, "wood", b);
             return true;
         } else if (id == R.id.graphics_etching) {
+//            setRecyclerViewVisible();
             getItemBySubtype("etching");
         } else if (id == R.id.graphics_linocut) {
+//            setRecyclerViewVisible();
             getItemBySubtype("linocut");
         } else if (id == R.id.graphics_screen_printing) {
+//            setRecyclerViewVisible();
             getItemBySubtype("screen printing");
         } else if (id == R.id.painting_acrylic_painting) {
+//            setRecyclerViewVisible();
             getItemBySubtype("acrylic painting");
         } else if (id == R.id.painting_aquarelle) {
             getItemBySubtype("aquarelle");
@@ -394,7 +452,7 @@ public class UserActivity extends AppCompatActivity
         if (requestCode == UPDATE_WALLET && resultCode == RESULT_OK) {
             user.setWallet(DBManager.getInstance(this).getUserWallet(user.getId()));
             userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
-            Toast.makeText(this, "Your wallet is updated!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.wallet_updated, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -404,7 +462,7 @@ public class UserActivity extends AppCompatActivity
 
         if (items.size() == 0 || items.isEmpty()) {
             wellcome.setVisibility(View.VISIBLE);
-            wellcome.setText("\n\n\nSorry!\nThere are no items in this category.");
+            wellcome.setText(R.string.sorry_no_items);
         } else {
             setRecyclerViewVisible();
         }
@@ -418,7 +476,7 @@ public class UserActivity extends AppCompatActivity
 
         if (items.size() == 0 || items.isEmpty()) {
             wellcome.setVisibility(View.VISIBLE);
-            wellcome.setText("\n\n\nSorry!\nThere are no items for sale.");
+            wellcome.setText(R.string.no_items_for_sale);
         } else {
             setRecyclerViewVisible();
         }
@@ -432,7 +490,7 @@ public class UserActivity extends AppCompatActivity
 
         if (items.size() == 0 || items.isEmpty()) {
             wellcome.setVisibility(View.VISIBLE);
-            wellcome.setText("\n\n\nSorry!\nThere are no matches in this search!");
+            wellcome.setText(R.string.no_searched_items);
         } else {
             setRecyclerViewVisible();
         }
@@ -441,6 +499,10 @@ public class UserActivity extends AppCompatActivity
         recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
+    private void setRecyclerViewVisible() {
+        recyclerView.setVisibility(View.VISIBLE);
+        wellcome.setVisibility(View.GONE);
+    }
 
     @Override
     public void newWalletSum() {
@@ -448,13 +510,6 @@ public class UserActivity extends AppCompatActivity
 
         recyclerView.setVisibility(View.GONE);
         wellcome.setVisibility(View.VISIBLE);
-        wellcome.setText("\n\n\nYour Wallet:\nNow you have: " + String.valueOf(user.getWallet()) + " Euro in your wallet!\nWant to buy anything more?");
+        wellcome.setText(getString(R.string.you_have_in_your_wallet) + String.valueOf(user.getWallet()) + getString(R.string.you_have_in_your_wallet_end));
     }
-
-    private void setRecyclerViewVisible() {
-        recyclerView.setVisibility(View.VISIBLE);
-        wellcome.setVisibility(View.GONE);
-    }
-
-
 }

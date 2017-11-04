@@ -28,7 +28,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".UserActivity"
-            android:label="@string/title_activity_user"
+            android:label=""
+
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
