@@ -147,7 +147,7 @@ public class WalletActivity extends AppCompatActivity {
                 double transfer = user.getWallet() + Double.parseDouble(sum.getText().toString());
 //                user.setWallet(transfer);
                 DBManager.getInstance(WalletActivity.this).updateUserWallet(user, Util.twoDecimalPlaces(transfer));
-                Toast.makeText(WalletActivity.this, "Sum: " + transfer + "\nUser id: " + user.getId(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(WalletActivity.this, "Sum: " + transfer + "\nUser id: " + user.getId(), Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent();
 //                Bundle bundle = new Bundle();

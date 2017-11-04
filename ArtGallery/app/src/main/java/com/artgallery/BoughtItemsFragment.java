@@ -16,6 +16,7 @@ import com.artgallery.Util.Util;
 public class BoughtItemsFragment extends Fragment {
 
 
+
     public BoughtItemsFragment() {
         // Required empty public constructor
     }

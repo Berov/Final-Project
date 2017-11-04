@@ -38,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     private View topView;
     private boolean imageChanged = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,19 +56,6 @@ public class ProfileActivity extends AppCompatActivity {
         topView = findViewById(R.id.profile_top_view2);
         image = (ImageView) findViewById(R.id.profile_user_image);
 
-        byte[] bytes = user.getUserImageBytes();
-
-        if (bytes == null) {
-            image.setImageResource(R.mipmap.emptyprofile);
-        } else {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-
-            RoundedBitmapDrawable round = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-            round.setCircular(true);
-
-            image.setImageDrawable(round);
-        }
-
         name.setText(user.getName());
         address.setText(user.getAddress());
         password.setText(user.getPassword());
@@ -75,14 +63,29 @@ public class ProfileActivity extends AppCompatActivity {
         phone.setText(user.getPhoneNumber());
         topView.setPadding(Util.getScreenWidth() / 10, 0, Util.getScreenWidth() / 10, 0);
 
+        byte[] bytes = user.getUserImageBytes();
+
+        if (bytes == null) {
+
+            image.setImageResource(R.mipmap.emptyprofile);
+        } else {
+
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            RoundedBitmapDrawable round = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            round.setCircular(true);
+            image.setImageDrawable(round);
+        }
+
+        topView.requestFocus();
+
         topView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Util.hideSoftKeyboard(ProfileActivity.this);
-//                topView.requestFocus();
             }
         });
+
 
         imageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivityForResult(intent, GALLERY_REQUEST);
             }
         });
+
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +119,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -137,6 +143,7 @@ public class ProfileActivity extends AppCompatActivity {
                     .setAspectRatio(1, 1)
                     .start(this);
         }
+
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
 
@@ -170,6 +177,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

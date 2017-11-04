@@ -2,12 +2,9 @@ package com.artgallery;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.MenuItemCompat;
@@ -28,8 +25,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -55,12 +50,10 @@ public class UserActivity extends AppCompatActivity
     private TextView userEmail;
     private TextView about;
     private TextView userWallet;
-//    private EditText search;
     private PopupWindow popupWindow;
     private LayoutInflater layoutInflater;
     private View topView;
     private RecyclerView recyclerView;
-//    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +74,6 @@ public class UserActivity extends AppCompatActivity
         userImage = (ImageView) v.findViewById(R.id.nav_header_image);
         topView = findViewById(R.id.content_user_parent_layout);
         recyclerView = (RecyclerView) findViewById(R.id.content_user_recycler_view);
-//        search = (EditText) findViewById(R.id.search_edit_text);
-//        searchView = (SearchView) findViewById(R.id.search_view);
 
 
         if (user.getUserImageBytes() != null) {
@@ -144,39 +135,14 @@ public class UserActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getAllItems();
-
-
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//
-//
-////                searchView.setIconifeid(true);
-////                searchView.invokeClose();
-//                searchView.setIconified(true);
-//                getItemsBySearchWord(query);
-//
-////                search.setText("");
-//                Util.hideSoftKeyboard(UserActivity.this);
-//
-//                topView.requestFocus();
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return false;
-//            }
-//        });
     }
+
 
     @Override
     public void onResume() {
         super.onResume();
 
         userName.setText(user.getName());
-//        userEmail.setText(user.getEmail());
         userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
     }
 
@@ -198,6 +164,7 @@ public class UserActivity extends AppCompatActivity
             }
         });
     }
+
 
     @Override
     public void onBackPressed() {
@@ -228,21 +195,24 @@ public class UserActivity extends AppCompatActivity
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.user, menu);
 
         final MenuItem searchItem = menu.findItem(R.id.action_search_view);
         final SearchView search = (SearchView) MenuItemCompat.getActionView(searchItem);
-
 
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
                 getItemsBySearchWord(query);
+
+                search.clearFocus();
+                search.setQuery("", false);
                 MenuItemCompat.collapseActionView(searchItem);
+                search.setIconified(true);
 
                 return false;
             }
@@ -253,41 +223,22 @@ public class UserActivity extends AppCompatActivity
             }
         });
 
-
         return true;
     }
 
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_item) {
-            Intent intent = new Intent(UserActivity.this, ItemActivity.class); //nbnbnnbnbbnbbnbnbnbbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbn
+            Intent intent = new Intent(UserActivity.this, ItemActivity.class);
             intent.putExtra("USER", user);
             startActivityForResult(intent, ITEM_ACTIVITY);
         }
 
-//        if (id == R.id.action_settings) {
-////            Intent intent = new Intent(UserActivity.this, SettingsActivity.class);//nbnbnnbnbbnbbnbnbnbbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbn
-////            startActivity(intent);
-//        }
-//
-//        if (id == R.id.action_search) {
-//            getItemsBySearchWord(search.getText().toString());
-//            search.setText("");
-//            Util.hideSoftKeyboard(this);
-//            topView.requestFocus();
-//        }
-
         if (id == R.id.action_wallet) {
-            Intent intent = new Intent(UserActivity.this, WalletActivity.class);//change it
+            Intent intent = new Intent(UserActivity.this, WalletActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("USER", user);
             intent.putExtras(bundle);
@@ -323,7 +274,6 @@ public class UserActivity extends AppCompatActivity
         NavigationView nv = (NavigationView) findViewById(R.id.nav_view);
         Menu m = nv.getMenu();
         int id = item.getItemId();
-//        setRecyclerViewVisible();
 
         if (id == R.id.category_graphics) {
             boolean b = !m.findItem(R.id.graphics_linocut).isVisible();
@@ -358,16 +308,12 @@ public class UserActivity extends AppCompatActivity
             Util.magic(m, "wood", b);
             return true;
         } else if (id == R.id.graphics_etching) {
-//            setRecyclerViewVisible();
             getItemBySubtype("etching");
         } else if (id == R.id.graphics_linocut) {
-//            setRecyclerViewVisible();
             getItemBySubtype("linocut");
         } else if (id == R.id.graphics_screen_printing) {
-//            setRecyclerViewVisible();
             getItemBySubtype("screen printing");
         } else if (id == R.id.painting_acrylic_painting) {
-//            setRecyclerViewVisible();
             getItemBySubtype("acrylic painting");
         } else if (id == R.id.painting_aquarelle) {
             getItemBySubtype("aquarelle");
@@ -426,6 +372,7 @@ public class UserActivity extends AppCompatActivity
         return true;
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -456,6 +403,7 @@ public class UserActivity extends AppCompatActivity
         }
     }
 
+
     private void getItemBySubtype(String subtype) {
 
         ArrayList<Item> items = DBManager.getInstance(this).getItemsBySubtype(subtype, user.getId());
@@ -471,6 +419,7 @@ public class UserActivity extends AppCompatActivity
         recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
+
     private void getAllItems() {
         ArrayList<Item> items = DBManager.getInstance(this).getAllItems(user.getId());
 
@@ -484,6 +433,7 @@ public class UserActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
+
 
     private void getItemsBySearchWord(String search) {
         ArrayList<Item> items = DBManager.getInstance(this).getItemsBySearchWord(search, user.getId());
@@ -499,10 +449,12 @@ public class UserActivity extends AppCompatActivity
         recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
+
     private void setRecyclerViewVisible() {
         recyclerView.setVisibility(View.VISIBLE);
         wellcome.setVisibility(View.GONE);
     }
+
 
     @Override
     public void newWalletSum() {

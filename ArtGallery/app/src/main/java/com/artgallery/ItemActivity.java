@@ -61,6 +61,7 @@ public class ItemActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+
         //My tries -----------------------------------------------------------------------------------------------------
 
         user = (User) getIntent().getSerializableExtra("USER");

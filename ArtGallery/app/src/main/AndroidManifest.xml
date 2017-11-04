@@ -59,6 +59,7 @@
 
         <activity android:name=".UploadItemActivity"
             android:parentActivityName=".ItemActivity"
+            android:label="Upload Item for Sale"
             android:screenOrientation="portrait" />
     </application>
 
