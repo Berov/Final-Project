@@ -4,7 +4,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.MenuItemCompat;
@@ -54,6 +61,7 @@ public class UserActivity extends AppCompatActivity
     private LayoutInflater layoutInflater;
     private View topView;
     private RecyclerView recyclerView;
+//    private Drawable itemSoldIcon;  TODO
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +98,7 @@ public class UserActivity extends AppCompatActivity
             }
         }
 
+
         userName.setText(user.getName());
         if (user.isAdmin()) {
             userEmail.setText(R.string.you_are_admin);
@@ -98,6 +107,13 @@ public class UserActivity extends AppCompatActivity
         }
 
         userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
+
+
+        if (user.getSaleFlag()) {
+//            itemSoldIcon.setBackgroundColor(Color.argb(255, 255, 0, 0));
+            //TODO
+        }
+
 
         topView.requestFocus();
         Util.hideSoftKeyboard(UserActivity.this);
@@ -121,8 +137,19 @@ public class UserActivity extends AppCompatActivity
             }
         });
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_photo_black_24dp);
+        if(user.getSaleFlag()){
+//            DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            //TODO !!!!!!!!!!!!!!!!!!!!!!!! change icon works!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        }
+
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -203,6 +230,7 @@ public class UserActivity extends AppCompatActivity
         final MenuItem searchItem = menu.findItem(R.id.action_search_view);
         final SearchView search = (SearchView) MenuItemCompat.getActionView(searchItem);
 
+
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -232,8 +260,19 @@ public class UserActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.action_item) {
+
+//            Intent intent = new Intent(LoginActivity.this, UserActivity.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("USER", user);
+//            intent.putExtras(bundle);
+
+
+
+
             Intent intent = new Intent(UserActivity.this, ItemActivity.class);
-            intent.putExtra("USER", user);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("USER", user);
+            intent.putExtras(bundle);
             startActivityForResult(intent, ITEM_ACTIVITY);
         }
 
@@ -400,6 +439,11 @@ public class UserActivity extends AppCompatActivity
             user.setWallet(DBManager.getInstance(this).getUserWallet(user.getId()));
             userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
             Toast.makeText(this, R.string.wallet_updated, Toast.LENGTH_SHORT).show();
+        }
+
+        if (requestCode == ITEM_ACTIVITY && resultCode == RESULT_OK) {
+
+            user = (User) data.getSerializableExtra("USER");
         }
     }
 

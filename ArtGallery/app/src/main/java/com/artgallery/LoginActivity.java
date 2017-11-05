@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -34,10 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         topView = findViewById(R.id.login_top_view);
         logo = (ImageView) findViewById(R.id.login_image_view_logo);
 
-
-
-        topView.setPadding(Util.getScreenWidth()/10,Util.getScreenHeight()/10,Util.getScreenWidth()/10,Util.getScreenHeight()/10);
-
+        topView.setPadding(Util.getScreenWidth() / 10, Util.getScreenHeight() / 10, Util.getScreenWidth() / 10, Util.getScreenHeight() / 10);
         logo.getLayoutParams().height = Util.getScreenHeight() / 8;
 
 
@@ -49,32 +47,36 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                User u;
+                User user;
 
                 if (DBManager.getInstance(LoginActivity.this).isValidLogin(email.getText().toString(), password.getText().toString())) {
-                    u = DBManager.getInstance(LoginActivity.this).getUser(email.getText().toString(), password.getText().toString());
+                    user = DBManager.getInstance(LoginActivity.this).getUser(email.getText().toString(), password.getText().toString());
 
-                    if (u == null) {
+                    if (user == null) {
                         Toast.makeText(LoginActivity.this, "Mysterious mistake!\nMay be a hack or no internet connection!", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
+                    addUserItems(user);
+
                     Intent intent = new Intent(LoginActivity.this, UserActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("USER", u);
+                    bundle.putSerializable("USER", user);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    Toast.makeText(LoginActivity.this, getString(R.string.YouEnteredAs) + u.getName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.YouEnteredAs) + user.getName(), Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.WrongEmailOrPassword, Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
         topView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -84,6 +86,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private void addUserItems(User user) {
+        user.setIUserItems(DBManager.getInstance(this).getUserItems(user.getId()));
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

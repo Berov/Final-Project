@@ -103,10 +103,10 @@ public class User implements Serializable {
 //        return Collections.unmodifiableList(boughtItems);
 //    }
 
-    public void addNewItem(Item newItem) {
-        userItems.add(newItem);
-//        boughtItems.add(newItem);
-    }
+//    public void addNewItem(Item newItem) {
+//        userItems.add(newItem);
+////        boughtItems.add(newItem);
+//    }
 
     public void setAdmin(boolean b) {
         this.isAdmin = b;
@@ -156,6 +156,10 @@ public class User implements Serializable {
 //        itemsForSale.add(item);
 //    }
 
+    public void setIUserItems(ArrayList<Item> userItems) {
+        this.userItems = userItems;
+    }
+
     public void addItem(Item item) {
         userItems.add(item);
     }
@@ -176,6 +180,48 @@ public class User implements Serializable {
             flag = 1;
         }
         return flag;
+    }
+
+
+    public ArrayList<Item> getItemsForSale() {
+
+        ArrayList<Item> itemsForSale = new ArrayList<>();
+
+        for (int i = 0; i < userItems.size(); i++) {
+            if (userItems.get(i).getBuyerID() == 0) {
+                itemsForSale.add(userItems.get(i));
+            }
+        }
+
+        return itemsForSale;
+    }
+
+
+    public ArrayList<Item> getSoldItems() {
+
+        ArrayList<Item> soldItems = new ArrayList<>();
+
+        for (int i = 0; i < userItems.size(); i++) {
+            if (userItems.get(i).getBuyerID() != 0 && userItems.get(i).getBuyerID() != id) {
+                soldItems.add(userItems.get(i));
+            }
+        }
+
+        return soldItems;
+    }
+
+
+    public ArrayList<Item> getBoughtItems() {
+
+        ArrayList<Item> boughtItems = new ArrayList<>();
+
+        for (int i = 0; i < userItems.size(); i++) {
+            if (userItems.get(i).getBuyerID() == id) {
+                boughtItems.add(userItems.get(i));
+            }
+        }
+
+        return boughtItems;
     }
 }
 

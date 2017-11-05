@@ -37,8 +37,6 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
         this.context = context;
         this.items = items;
         this.user = user;
-
-
     }
 
 
@@ -139,10 +137,10 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
 
                                     Util.addGalleryMoney(item.getPrice() / 100 * Util.GALLERY_PERCENT, context);
 
-                                    item.setOwnerID(user.getId());
+                                    item.setBuyerID(user.getId());
                                     DBManager.getInstance(context).updateItem(item);
 
-                                    user.addNewItem(item);
+                                    user.addItem(item);
                                     user.setWallet(user.getWallet() - item.getPrice());
                                     DBManager.getInstance(context).updateUser(user); //because of wallet
 

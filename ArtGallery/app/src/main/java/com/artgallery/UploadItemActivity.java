@@ -9,6 +9,8 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,10 +54,14 @@ public class UploadItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_item);
 
-        user = (User) getIntent().getSerializableExtra("USER");
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+
+        user = (User) bundle.getSerializable("USER");
+
         topView = findViewById(R.id.uploadItem_top_view);
 
-        Toast.makeText(this, "Click on the camera to set your image.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Click on the camera to set your image." + user.getName(), Toast.LENGTH_LONG).show();
 
         title = (EditText) findViewById(R.id.txtTitlePreview);
         description = (EditText) findViewById(R.id.txtDescPreview);
@@ -222,7 +228,7 @@ public class UploadItemActivity extends AppCompatActivity {
                     author.getText().toString(),
                     user.getId(),
                     imageAsBytesArray,
-                    "F"); // F - for sale, S - sold, B- bough
+                    0);
 
             int imageID = DBManager.getInstance(this).addNewItem(newItem);
 
@@ -230,9 +236,16 @@ public class UploadItemActivity extends AppCompatActivity {
                 Toast.makeText(this, "The new item is uploaded for sale.", Toast.LENGTH_SHORT).show();
 
                 newItem.setId(imageID);
-                user.addNewItem(newItem);
 
-                setResult(RESULT_OK);
+                user.addItem(newItem);
+
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("USER", user);
+                intent.putExtras(bundle);
+
+
                 finish();
 
             } else {
@@ -323,4 +336,26 @@ public class UploadItemActivity extends AppCompatActivity {
     private ArrayList getSubtypesByType(String type) {
         return DBManager.getInstance(this).getSubtypesByType(type);
     }
+
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_item, menu);
+//        return true;
+//    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+
+        if (id == android.R.id.home) {
+
+            onBackPressed();
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

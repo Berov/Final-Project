@@ -18,30 +18,36 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.artgallery.Model.Item;
 import com.artgallery.Model.User;
 
-public class ItemActivity extends AppCompatActivity {
-    FragmentManager fm = getSupportFragmentManager();
-//    Fragment a = fm.findFragmentById(R.id.add_item_scroll_view);
+import java.util.ArrayList;
 
+public class ItemActivity extends AppCompatActivity {
+    private FragmentManager fm = getSupportFragmentManager();
+
+    private Fragment fragmentForSale = new ItemsForSameFragment();
+    private Fragment fragmentSold = new SoldItemsFragment();
+    private Fragment fragmentBought = new BoughtItemsFragment();
     public static final int GALLERY_REQUEST = 30;
 
-    //    private Button btnCancel, btnUpload;
-//
-    private EditText txtTitle, txtPrice, txtDesc, txtAuthor;
-    //
-    private Spinner spKind, spType;
-    private String type, subtype;
-    private ImageView imgPreview;
-    private int userID;
-    //    private int ownerID;
-    private double price;
 
-    private boolean isTitleTrue, isDescTrue, isAuthorTrue, isPriceTrue = false;
-    private boolean imageChanged = false;
-    private byte[] bytes;
-    private User user;
+    //    private EditText txtTitle, txtPrice, txtDesc, txtAuthor;
+//    //
+//    private Spinner spKind, spType;
+//    private String type, subtype;
+//    private ImageView imgPreview;
+//    private int userID;
+//    private double price;
+//
+//    private boolean isTitleTrue, isDescTrue, isAuthorTrue, isPriceTrue = false;
+//    private boolean imageChanged = false;
+//    private byte[] bytes;
+    public static User user;
+    public static ArrayList<Item> itemsForSale;
+    ArrayAdapter<CharSequence> arrTypesAdapter;
 
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -52,22 +58,35 @@ public class ItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), 3);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
 
         //My tries -----------------------------------------------------------------------------------------------------
 
-        user = (User) getIntent().getSerializableExtra("USER");
+
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+
+        user = (User) bundle.getSerializable("USER");
+
+        Toast.makeText(this, "User - " + user.getName(), Toast.LENGTH_SHORT).show();
 
 
-        ArrayAdapter<CharSequence> arrTypesAdapter = ArrayAdapter.createFromResource(ItemActivity.this, R.array.itemTypes, android.R.layout.simple_spinner_item);
+//        user = (User) getIntent().getSerializableExtra("USER");
+        itemsForSale = user.getItemsForSale();
+
+
+        arrTypesAdapter = ArrayAdapter.createFromResource(ItemActivity.this, R.array.itemTypes, android.R.layout.simple_spinner_item);
         arrTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
     }
@@ -82,23 +101,75 @@ public class ItemActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add_new_item) {
             Intent intent = new Intent(ItemActivity.this, UploadItemActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("USER", user);
             intent.putExtras(bundle);
             startActivityForResult(intent, GALLERY_REQUEST);
             return true;
+
         } else if (id == android.R.id.home) {
+
+
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("USER", user);
+            intent.putExtras(bundle);
+
             finish();
+
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+////        Toast.makeText(this, "onResume User Items - " + itemsForSale.size(), Toast.LENGTH_SHORT).show();
+////        fm.beginTransaction().detach(fragmentForSale).attach(fragmentForSale).commit();
+//    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
+
+            user = (User) data.getSerializableExtra("USER");
+            itemsForSale = user.getItemsForSale();
+
+            Toast.makeText(this, "onResult User Items - " + itemsForSale.size(), Toast.LENGTH_LONG).show();
+
+
+//            arrTypesAdapter = ArrayAdapter.createFromResource(ItemActivity.this, R.array.itemTypes, android.R.layout.simple_spinner_item);
+//            arrTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+            fm.beginTransaction().detach(fragmentForSale).attach(fragmentForSale).commit();
+
+
+//
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("USER", user);
+        intent.putExtras(bundle);
+        finish();
+    }
 
     /**
-     * A placeholder fragment containing a simple view.
+     * A placeholder fragment containing fragmentForSale simple view.
      */
     public static class PlaceholderFragment extends Fragment {
         /**
@@ -111,7 +182,7 @@ public class ItemActivity extends AppCompatActivity {
         }
 
         /**
-         * Returns a new instance of this fragment for the given section
+         * Returns fragmentForSale new instance of this fragment for the given section
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
@@ -122,21 +193,14 @@ public class ItemActivity extends AppCompatActivity {
 
             return fragment;
         }
-//
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                                 Bundle savedInstanceState) {
-//            View rootView = inflater.inflate(R.layout.fragment_item, container, false);
-//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-//            return rootView;
-//        }
+
     }
 
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private int number;
+
 
         public SectionsPagerAdapter(FragmentManager fm, int number) {
             super(fm);
@@ -147,11 +211,14 @@ public class ItemActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new SoldItemsFragment();
+//                    return new SoldItemsFragment();
+                    return fragmentSold;
                 case 1:
-                    return new BoughtItemsFragment();
+//                    return new BoughtItemsFragment();
+                    return fragmentBought;
                 case 2:
-                    return new ItemsForSameFragment();
+//                    return new ItemsForSameFragment();
+                    return fragmentForSale;
                 default:
                     return null;
             }

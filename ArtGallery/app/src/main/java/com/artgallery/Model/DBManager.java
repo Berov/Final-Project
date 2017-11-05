@@ -52,7 +52,7 @@ public class DBManager extends SQLiteOpenHelper {
             "picture BLOB NOT NULL," +
             "owner_id INTEGER NOT NULL," +
             "author TEXT," +
-            "flag_status TEXT NOT NULL," +  // F - for sale, S - sold, B - bough (can add more statuses if is  necessary)
+            "buyer_id INTEGER NOT NULL," +
             "subtype_id INTEGER NOT NULL," +
             "FOREIGN KEY(owner_id) REFERENCES Users(id)," +
             "FOREIGN KEY(subtype_id) REFERENCES Subtypes(id)" +
@@ -309,7 +309,7 @@ public class DBManager extends SQLiteOpenHelper {
         values.put("price", item.getPrice());
         values.put("description", item.getDescription());
         values.put("picture", item.getBytePicture());
-        values.put("flag_status", item.getImageStatus());
+        values.put("buyer_id", item.getBuyerID());
         values.put("owner_id", item.getOwnerID());
         if (!item.getAuthor().isEmpty()) {
             values.put("author", item.getAuthor());
@@ -319,13 +319,13 @@ public class DBManager extends SQLiteOpenHelper {
         long id = getWritableDatabase().insert("Items", null, values);
         item.setId((int) id);
 
-        Toast.makeText(context, "An Item is uploaded\n" +
-                "title: " + item.getTitle() + "\n" +
-                "description: " + item.getDescription() + "\n" +
-                "price: " + item.getPrice() + "\n" +
-                "author: " + item.getAuthor() + "\n" +
-                "owner id: " + +item.getOwnerID() + "\n" +
-                "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "An Item is uploaded\n" +
+//                "title: " + item.getTitle() + "\n" +
+//                "description: " + item.getDescription() + "\n" +
+//                "price: " + item.getPrice() + "\n" +
+//                "author: " + item.getAuthor() + "\n" +
+//                "owner id: " + +item.getOwnerID() + "\n" +
+//                "", Toast.LENGTH_SHORT).show();
 
         return (int) id;
     }
@@ -419,7 +419,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     public ArrayList<Item> getUserItems(int userID) {
-        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE owner_id =" + userID, null);
+        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE owner_id =" + userID + " OR buyer_id =" + userID, null);
         return getItemsByCursorQwery(cursor);
     }
 
@@ -456,6 +456,7 @@ public class DBManager extends SQLiteOpenHelper {
 //
 //        cursor.close();
 //        return items;
+
         GetItemById g = new GetItemById();
 
         return g.doInBackground(cursor);
@@ -477,7 +478,7 @@ public class DBManager extends SQLiteOpenHelper {
                 double price = cursor.getDouble(cursor.getColumnIndex("price"));
                 String description = cursor.getString(cursor.getColumnIndex("description"));
                 byte[] picture = cursor.getBlob(cursor.getColumnIndex("picture"));
-                String status = cursor.getString(cursor.getColumnIndex("title"));
+                int buyer_id = cursor.getInt(cursor.getColumnIndex("buyer_id"));
                 int owner_id = cursor.getInt(cursor.getColumnIndex("owner_id"));
                 int subtype_id = cursor.getInt(cursor.getColumnIndex("subtype_id"));
                 String author = "";
@@ -486,7 +487,7 @@ public class DBManager extends SQLiteOpenHelper {
                     author = cursor.getString(cursor.getColumnIndex("author"));
                 }
 
-                Item item = new Item(id, subtype_id, title, description, price, author, owner_id, picture, status);
+                Item item = new Item(id, subtype_id, title, description, price, author, owner_id, picture, buyer_id);
                 items.add(item);
             }
 
@@ -515,6 +516,7 @@ public class DBManager extends SQLiteOpenHelper {
             }
         }.execute(item);
     }
+
 
     public void soldSeen(int ownerID) {// ??????????????????????????????????????????????????????????????????
         ContentValues values = new ContentValues();

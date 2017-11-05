@@ -16,11 +16,11 @@ public class Item implements Serializable {
     private String author;
     private int owner_id;
     private int subtype_id;
-    private String flag_status;
+    private int buyer_id = 0;
     private int id;
     private byte[] picture;
 
-    public Item(int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture, String status) {
+    public Item(int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture, int buyer_id) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -28,11 +28,13 @@ public class Item implements Serializable {
         this.owner_id = owner_id;
         this.picture = picture;
         this.subtype_id = subtype_id;
-        this.flag_status = status;
+        if (buyer_id != 0) {
+            this.buyer_id = buyer_id;
+        }
     }
 
-    public Item(int id, int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture, String status) {
-        this(subtype_id, title, description, price, author, owner_id, picture, status);
+    public Item(int id, int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture, int buyer_id) {
+        this(subtype_id, title, description, price, author, owner_id, picture, buyer_id);
         this.id = id;
     }
 
@@ -61,6 +63,10 @@ public class Item implements Serializable {
         return id;
     }
 
+    public int getBuyerID() {
+        return buyer_id;
+    }
+
     public byte[] getBytePicture() {
         return picture;
     }
@@ -78,11 +84,11 @@ public class Item implements Serializable {
         return BitmapFactory.decodeByteArray(picture, 0, picture.length);
     }
 
-    public void setOwnerID(int newOwnerID) {
-        owner_id = newOwnerID;
+    public void setBuyerID(int buyerID) {
+        this.buyer_id = buyerID;
     }
 
-    public String getImageStatus(){
-        return  flag_status;
-    }
+//    public String getImageStatus(){
+//        return  flag_status;
+//    }
 }
