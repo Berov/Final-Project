@@ -30,12 +30,12 @@
             <!--app:contentInsetEnd="0dp">-->
 
             <!--<EditText-->
-                <!--android:id="@+id/search_edit_text"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:hint="search..."-->
-                <!--android:maxLines="1"-->
-                <!--android:textSize="14sp" />-->
+            <!--android:id="@+id/search_edit_text"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="search..."-->
+            <!--android:maxLines="1"-->
+            <!--android:textSize="14sp" />-->
 
         </android.support.v7.widget.Toolbar>
 

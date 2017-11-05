@@ -1,7 +1,6 @@
 package com.artgallery;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
@@ -143,26 +142,6 @@ public class ItemActivity extends AppCompatActivity {
     }
 
 
-//    public static class PlaceholderFragment extends Fragment {  //????????????????????????????????????????????????//TODO remove it
-//
-//        private static final String ARG_SECTION_NUMBER = "section_number";
-//
-//        public PlaceholderFragment() {
-//        }
-//
-//
-//        public static PlaceholderFragment newInstance(int sectionNumber) {
-//            PlaceholderFragment fragment = new PlaceholderFragment();
-//            Bundle args = new Bundle();
-//            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//            fragment.setArguments(args);
-//
-//            return fragment;
-//        }
-//
-//    }
-
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private int number;
@@ -203,11 +182,11 @@ public class ItemActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    return "Sold items";
+                    return "SOLD";
                 case 1:
-                    return "Bought items";
+                    return "BOUGHT";
                 case 2:
-                    return "Items for sale";
+                    return "FOR SALE";
             }
 
             return null;

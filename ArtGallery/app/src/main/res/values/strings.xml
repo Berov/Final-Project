@@ -37,11 +37,7 @@
     <string name="bulgaria_sofia">Bulgaria, Sofia</string>
     <string name="nikolai_berov_gmail_com">nikolai.berov@gmail.com</string>
     <string name="author_nikolai_berov">Author: Nikolai Berov</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_item">ItemActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
     <string name="wallet">"Wallet "</string>
     <string name="money">" €"</string>
     <string name="leaving">Leaving so soon?</string>
@@ -50,10 +46,10 @@
     <string name="No">No</string>
     <string name="availability">"Availability: "</string>
     <string name="wallet_updated">Your wallet is updated!</string>
-    <string name="sorry_no_items">Sorry! There are no items in this category.</string>
+    <string name="sorry_no_items">"\n\nSorry!\nThere are no items in this category."</string>
     <string name="you_are_admin">You are the Admin</string>
-    <string name="no_items_for_sale">Sorry! There are no items for sale.</string>
-    <string name="no_searched_items">Sorry! There are no matches in this search!</string>
+    <string name="no_items_for_sale">"\n\nSorry!\nThere are no items for sale."</string>
+    <string name="no_searched_items">"\n\nSorry!\nThere are no matches in this search!"</string>
     <string name="you_have_in_your_wallet">Your Wallet: Now you have:</string>
     <string name="you_have_in_your_wallet_end">Euro in your wallet! Want to buy anything more?</string>
     <string-array name="itemTypes">

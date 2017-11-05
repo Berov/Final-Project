@@ -60,19 +60,19 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
         holder.title.setText("Title: " + item.getTitle());
         holder.price.setText("Price: " + String.valueOf(item.getPrice()));
 
-        holder.topView.setBackgroundColor(Color.argb(255, 88, 24, 69));
+        holder.topView.setBackgroundColor(Color.argb(128, 88, 24, 69));
 
         if (position % 2 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(255, 144, 12, 63));
+            holder.topView.setBackgroundColor(Color.argb(128, 144, 12, 63));
         }
         if (position % 3 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(255, 199, 0, 57));
+            holder.topView.setBackgroundColor(Color.argb(128, 199, 0, 57));
         }
         if (position % 4 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(255, 255, 87, 51));
+            holder.topView.setBackgroundColor(Color.argb(128, 255, 87, 51));
         }
         if (position % 5 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(255, 255, 195, 0));
+            holder.topView.setBackgroundColor(Color.argb(128, 255, 195, 0));
         }
 
         if (item.getDescription().length() < 40) {
@@ -99,6 +99,7 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
                 price.setText("Price:  " + String.valueOf(item.getPrice()) + "€");
 
                 if (!item.getAuthor().isEmpty() && item.getAuthor() != null) {
+
                     author.setText("Author: " + item.getAuthor());
                 }
 
@@ -156,7 +157,9 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
                                     AlertDialog alertDialog2 = alertDialogBuy.create();
 
                                     alertDialog2.show();
+
                                 } else {
+
                                     AlertDialog.Builder alertDialogBuy = new AlertDialog.Builder(context);
                                     alertDialogBuy
                                             .setCancelable(true)
@@ -176,14 +179,13 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
 
                 AlertDialog alertDialog = alertDialogWantToBuy.create();
                 alertDialog.show();
-
             }
         });
     }
 
 
     public interface BuyDialogClicked {
-        public void newWalletSum();
+        void newWalletSum();
     }
 
 

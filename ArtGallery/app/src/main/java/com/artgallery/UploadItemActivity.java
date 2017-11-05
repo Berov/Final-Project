@@ -8,10 +8,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,7 +42,6 @@ public class UploadItemActivity extends AppCompatActivity {
     private String type, subtype;
     private ImageView image;
     private double priceVal;
-    //    private boolean isTitleTrue, isDescTrue, isAuthorTrue, isPriceTrue = false;
     private boolean isImageChanged = false;
     private byte[] imageAsBytesArray;
 
@@ -61,7 +57,7 @@ public class UploadItemActivity extends AppCompatActivity {
 
         topView = findViewById(R.id.uploadItem_top_view);
 
-        Toast.makeText(this, "Click on the camera to set your image." + user.getName(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Click on the camera to set your image.", Toast.LENGTH_LONG).show();
 
         title = (EditText) findViewById(R.id.txtTitlePreview);
         description = (EditText) findViewById(R.id.txtDescPreview);
@@ -87,15 +83,6 @@ public class UploadItemActivity extends AppCompatActivity {
             }
         });
 
-
-//        topView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                topView.requestFocus();
-//                Util.hideSoftKeyboard(UploadItemActivity.this);
-//                return false;
-//            }
-//        });
 
         spType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -337,12 +324,6 @@ public class UploadItemActivity extends AppCompatActivity {
         return DBManager.getInstance(this).getSubtypesByType(type);
     }
 
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_item, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -250,12 +250,6 @@ public class UserActivity extends AppCompatActivity
 
         if (id == R.id.action_item) {
 
-//            Intent intent = new Intent(LoginActivity.this, UserActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("USER", user);
-//            intent.putExtras(bundle);
-
-
             Intent intent = new Intent(UserActivity.this, ItemActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("USER", user);
@@ -264,6 +258,7 @@ public class UserActivity extends AppCompatActivity
         }
 
         if (id == R.id.action_wallet) {
+
             Intent intent = new Intent(UserActivity.this, WalletActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("USER", user);
@@ -272,6 +267,7 @@ public class UserActivity extends AppCompatActivity
         }
 
         if (id == R.id.action_profile) {
+
             Intent intent = new Intent(UserActivity.this, ProfileActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("USER", user);
@@ -280,10 +276,12 @@ public class UserActivity extends AppCompatActivity
         }
 
         if (id == R.id.action_about) {
+
             initiatePopupAbout(findViewById(R.id.content_user_parent_layout));
         }
 
         if (id == R.id.action_logout) {
+
             Intent intent = new Intent(UserActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
@@ -423,6 +421,7 @@ public class UserActivity extends AppCompatActivity
         }
 
         if (requestCode == UPDATE_WALLET && resultCode == RESULT_OK) {
+
             user.setWallet(DBManager.getInstance(this).getUserWallet(user.getId()));
             userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
             Toast.makeText(this, R.string.wallet_updated, Toast.LENGTH_SHORT).show();
@@ -462,6 +461,7 @@ public class UserActivity extends AppCompatActivity
 
 
     private void getItemsBySearchWord(String search) {
+
         items = DBManager.getInstance(this).getItemsBySearchWord(search, user.getId());
 
         if (items.size() == 0 || items.isEmpty()) {

@@ -10,7 +10,6 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,10 +24,8 @@ import com.artgallery.Util.Util;
 public class WalletActivity extends AppCompatActivity {
     private User user;
     private Button deposit, confirm, cancel;
-    //    private Button withdraw;
     private TextView sum, availability;
     private double transferSum;
-//    private View topView;
     public static final int MAX_SUM_IN_THE_BANK = 999999;
 
     @Override
@@ -43,24 +40,12 @@ public class WalletActivity extends AppCompatActivity {
         deposit = (Button) findViewById(R.id.wallet_btn_deposit);
         confirm = (Button) findViewById(R.id.wallet_btn_confirm);
         cancel = (Button) findViewById(R.id.wallet_btn_cancel);
-//        topView = findViewById(R.id.wallet_top_view);
-
-
-//        withdraw = (Button) findViewById(R.id.wallet_btn_withdraw);
         sum = (TextView) findViewById(R.id.wallet_text_sum);
         availability = (TextView) findViewById(R.id.wallet_text_availability);
 
         sum.setText("0");
         availability.setText(String.valueOf(Util.twoDecimalPlaces(user.getWallet())));
 
-//        topView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                topView.requestFocus();
-//                Util.hideSoftKeyboard(WalletActivity.this);
-//                return false;
-//            }
-//        });
 
         deposit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,38 +56,12 @@ public class WalletActivity extends AppCompatActivity {
 
                 final EditText inputEuro = new EditText(WalletActivity.this);
                 inputEuro.setHint("euro          ");
-//                inputEuro.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1.0f));
-//                inputEuro.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
-
-//                final EditText inputEuroCents = new EditText(WalletActivity.this);
-//                inputEuroCents.setHint("cents");
 
                 LinearLayout layout = new LinearLayout(WalletActivity.this);
                 layout.setOrientation(LinearLayout.HORIZONTAL);
                 layout.setGravity(Gravity.CENTER);
                 layout.addView(inputEuro);
-//                layout.addView(inputEuroCents);
-
-//                final LayoutParams lparams = new LayoutParams(50,30); // Width , height
-//                final EditText edittext = new EditText(this);
-//                edittext.setLayoutParams(lparams);
-//                return edittext;
-
-
-//                Context context = mapView.getContext();
-//                LinearLayout layout = new LinearLayout(context);
-//                layout.setOrientation(LinearLayout.VERTICAL);
-//
-//                final EditText titleBox = new EditText(context);
-//                titleBox.setHint("Title");
-//                layout.addView(titleBox);
-//
-//                final EditText descriptionBox = new EditText(context);
-//                descriptionBox.setHint("Description");
-//                layout.addView(descriptionBox);
-//
-//                dialog.setView(layout);
 
 
                 inputEuro.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -119,10 +78,10 @@ public class WalletActivity extends AppCompatActivity {
                             transferSum = Util.twoDecimalPlaces(euro);
 
                             if (transferSum + user.getWallet() > MAX_SUM_IN_THE_BANK) {
+
                                 Toast.makeText(WalletActivity.this, "In the IT Talents Bank max sum of the wallet is 9999999!\nChange your deposit please! You can deposit max " + (MAX_SUM_IN_THE_BANK - user.getWallet()) + " euro!", Toast.LENGTH_LONG).show();
                             } else {
-//                                user.setWallet(user.getWallet() + transferSum);
-//                                DBManager.getInstance(WalletActivity.this).updateUserWallet(user.getId(), user.getWallet());
+
                                 sum.setText(String.valueOf(Util.twoDecimalPlaces(Double.parseDouble(inputEuro.getText().toString()))));
                             }
                         } catch (ParseException e) {
@@ -145,15 +104,8 @@ public class WalletActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 double transfer = user.getWallet() + Double.parseDouble(sum.getText().toString());
-//                user.setWallet(transfer);
                 DBManager.getInstance(WalletActivity.this).updateUserWallet(user, Util.twoDecimalPlaces(transfer));
-//                Toast.makeText(WalletActivity.this, "Sum: " + transfer + "\nUser id: " + user.getId(), Toast.LENGTH_LONG).show();
-
                 Intent intent = new Intent();
-//                Bundle bundle = new Bundle();
-//                bundle.putDouble("MONEY", transfer);
-//                intent.putExtras(bundle);
-
                 setResult(RESULT_OK, intent);
                 finish();
             }

@@ -29,7 +29,8 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextAppearance="@style/TextAppearance.AppCompat" />
+            android:background="@color/color5"
+            app:tabSelectedTextColor="@color/colorPrimaryDark" />
 
     </android.support.design.widget.AppBarLayout>
 
