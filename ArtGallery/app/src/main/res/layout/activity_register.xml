@@ -26,7 +26,9 @@
             android:layout_height="wrap_content"
             android:padding="24dp"
             android:text="@string/registration"
-            android:textSize="18sp"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:visibility="visible" />
 
         <android.support.design.widget.TextInputLayout
@@ -135,7 +137,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/i_agree_to_the" />
+                android:text="@string/i_agree_to_the"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/register_terms_and_conditions"
@@ -159,16 +162,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="@string/cancel"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textColor="@color/color3"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/register_btn_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="@string/register"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textColor="@color/color3"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>

@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView logo;
     private static final int REQUEST_CODE = 1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -58,7 +59,9 @@ public class LoginActivity extends AppCompatActivity {
                     user = DBManager.getInstance(LoginActivity.this).getUser(email.getText().toString(), password.getText().toString());
 
                     if (user == null) {
+
                         Toast.makeText(LoginActivity.this, "Mysterious mistake!\nMay be a hack or no internet connection!", Toast.LENGTH_SHORT).show();
+
                         return;
                     }
 
@@ -69,9 +72,10 @@ public class LoginActivity extends AppCompatActivity {
                     bundle.putSerializable("USER", user);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    Toast.makeText(LoginActivity.this, getString(R.string.YouEnteredAs) + user.getName(), Toast.LENGTH_SHORT).show();
+
                     finish();
                 } else {
+
                     Toast.makeText(LoginActivity.this, R.string.WrongEmailOrPassword, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -81,7 +85,9 @@ public class LoginActivity extends AppCompatActivity {
         topView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+
                 Util.hideSoftKeyboard(LoginActivity.this);
+
                 return false;
             }
         });
@@ -89,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void addUserItems(User user) {
+
         user.setIUserItems(DBManager.getInstance(this).getUserItems(user.getId()));
     }
 

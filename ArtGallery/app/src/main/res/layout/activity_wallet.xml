@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="BANK OF IT TALENTS"
         android:textColor="@color/colorPrimary"
-        android:textSize="18sp" />
+        android:textSize="30sp" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         android:layout_margin="14dp"
         android:text="@string/wallet"
         android:textColor="@color/colorAccent"
-        android:textSize="18sp" />
+        android:textSize="24sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -40,7 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/availability"
-            android:textSize="18sp" />
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/wallet_text_availability"
@@ -49,14 +50,15 @@
             android:layout_weight="1"
             android:text="0.00"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/money"
-            android:textSize="18sp" />
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
@@ -70,7 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Deposit: "
-            android:textSize="18sp" />
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/wallet_text_sum"
@@ -79,14 +82,15 @@
             android:layout_weight="1"
             android:text="0.00"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/money"
-            android:textSize="18sp" />
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
@@ -102,8 +106,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/color5"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:text="Deposit"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
 
         <!--<Button-->
         <!--android:id="@+id/wallet_btn_withdraw"-->
@@ -125,14 +134,23 @@
             android:id="@+id/wallet_btn_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Confirm transaction"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/color3"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/wallet_btn_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Cancel transaction"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/color3"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

@@ -18,16 +18,17 @@ public class BoughtItemsFragment extends Fragment {
         // Required empty public constructor
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
 
         ArrayList<Item> items = ItemActivity.boughtItems;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = new RecyclerView(getContext());
 
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new ItemsActivityRecycleViewAdapter(getContext(), items, R.color.colorMiddle));
+        recyclerView.setAdapter(new ItemsActivityRecycleViewAdapter(getContext(), items, R.color.color5));
+
         return recyclerView;
     }
 }

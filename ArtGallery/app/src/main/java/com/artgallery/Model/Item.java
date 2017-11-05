@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 
 public class Item implements Serializable {
+
     private String title;
     private String description;
     private double price;
@@ -21,6 +22,7 @@ public class Item implements Serializable {
     private byte[] picture;
 
     public Item(int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture, int buyer_id) {
+
         this.title = title;
         this.description = description;
         this.price = price;
@@ -34,40 +36,49 @@ public class Item implements Serializable {
     }
 
     public Item(int id, int subtype_id, String title, String description, double price, String author, int owner_id, byte[] picture, int buyer_id) {
+
         this(subtype_id, title, description, price, author, owner_id, picture, buyer_id);
         this.id = id;
     }
 
 
     public String getTitle() {
+
         return title;
     }
 
     public String getDescription() {
+
         return description;
     }
 
     public double getPrice() {
+
         return price;
     }
 
     public String getAuthor() {
+
         return author;
     }
 
     public int getOwnerID() {
+
         return owner_id;
     }
 
     public int getId() {
+
         return id;
     }
 
     public int getBuyerID() {
+
         return buyer_id;
     }
 
     public byte[] getBytePicture() {
+
         return picture;
     }
 
@@ -76,19 +87,17 @@ public class Item implements Serializable {
     }
 
     public int getSubtypeID() {
+
         return subtype_id;
     }
 
     public Bitmap getImage() {
-//        Bitmap bm = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+
         return BitmapFactory.decodeByteArray(picture, 0, picture.length);
     }
 
     public void setBuyerID(int buyerID) {
+
         this.buyer_id = buyerID;
     }
-
-//    public String getImageStatus(){
-//        return  flag_status;
-//    }
 }

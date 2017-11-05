@@ -4,10 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -61,8 +57,8 @@ public class UserActivity extends AppCompatActivity
     private LayoutInflater layoutInflater;
     private View topView;
     private RecyclerView recyclerView;
-   private  ArrayList<Item> items;
-//    private Drawable itemSoldIcon;  TODO
+    private ArrayList<Item> items;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +79,6 @@ public class UserActivity extends AppCompatActivity
         userImage = (ImageView) v.findViewById(R.id.nav_header_image);
         topView = findViewById(R.id.content_user_parent_layout);
         recyclerView = (RecyclerView) findViewById(R.id.content_user_recycler_view);
-
 
         if (user.getUserImageBytes() != null) {
 
@@ -108,12 +103,6 @@ public class UserActivity extends AppCompatActivity
         }
 
         userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
-
-
-        if (user.getSaleFlag()) {
-//            itemSoldIcon.setBackgroundColor(Color.argb(255, 255, 0, 0));
-            //TODO
-        }
 
 
         topView.requestFocus();
@@ -143,14 +132,11 @@ public class UserActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_photo_black_24dp);
-        if(user.getSaleFlag()){
-//            DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.colorPrimaryDark));
-            //TODO !!!!!!!!!!!!!!!!!!!!!!!! change icon works!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        if (user.getSaleFlag()) {
+            DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.colorPrimaryDark));
         }
-
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -268,8 +254,6 @@ public class UserActivity extends AppCompatActivity
 //            Bundle bundle = new Bundle();
 //            bundle.putSerializable("USER", user);
 //            intent.putExtras(bundle);
-
-
 
 
             Intent intent = new Intent(UserActivity.this, ItemActivity.class);
@@ -456,29 +440,24 @@ public class UserActivity extends AppCompatActivity
         items = DBManager.getInstance(this).getItemsBySubtype(subtype, user.getId());
 
         if (items.size() == 0 || items.isEmpty()) {
-            wellcome.setVisibility(View.VISIBLE);
+            setWellcomeTextVisible();
             wellcome.setText(R.string.sorry_no_items);
         } else {
             setRecyclerViewVisible();
         }
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
 
     private void getAllItems() {
+
         items = DBManager.getInstance(this).getAllItems(user.getId());
 
         if (items.size() == 0 || items.isEmpty()) {
-            wellcome.setVisibility(View.VISIBLE);
+            setWellcomeTextVisible();
             wellcome.setText(R.string.no_items_for_sale);
         } else {
             setRecyclerViewVisible();
         }
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
 
@@ -486,18 +465,24 @@ public class UserActivity extends AppCompatActivity
         items = DBManager.getInstance(this).getItemsBySearchWord(search, user.getId());
 
         if (items.size() == 0 || items.isEmpty()) {
-            wellcome.setVisibility(View.VISIBLE);
+            setWellcomeTextVisible();
             wellcome.setText(R.string.no_searched_items);
         } else {
             setRecyclerViewVisible();
         }
 
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
+    }
+
+
+    private void setWellcomeTextVisible() {
+
+        wellcome.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
     }
 
 
     private void setRecyclerViewVisible() {
+
         recyclerView.setVisibility(View.VISIBLE);
         wellcome.setVisibility(View.GONE);
 
@@ -508,6 +493,7 @@ public class UserActivity extends AppCompatActivity
 
     @Override
     public void newWalletSum() {
+
         userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
 
         recyclerView.setVisibility(View.GONE);

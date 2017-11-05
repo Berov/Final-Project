@@ -132,23 +132,25 @@
                 android:id="@+id/btnCancelSave"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="Cancel"
                 android:textAllCaps="false"
-                android:textSize="14sp" />
+                android:textColor="@color/color3"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnSaveUpload"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="Upload"
                 android:textAllCaps="false"
-                android:textSize="14sp" />
+                android:textColor="@color/color3"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

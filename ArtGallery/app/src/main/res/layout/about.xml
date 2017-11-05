@@ -25,7 +25,9 @@
         android:layout_height="match_parent"
         android:text="@string/art_gallery_v1_0"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
@@ -59,7 +61,8 @@
         android:autoLink="email"
         android:text="@string/nikolai_berov_gmail_com"
         android:textAlignment="center"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -74,14 +77,15 @@
 </LinearLayout>
 
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="@string/_2017"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
     <!--</LinearLayout>-->

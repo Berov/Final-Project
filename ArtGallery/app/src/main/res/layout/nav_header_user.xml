@@ -16,14 +16,14 @@
         android:id="@+id/nav_header_image"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@mipmap/emptyprofile" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:gravity="right"
         android:orientation="vertical"
         android:paddingTop="@dimen/nav_header_vertical_spacing">
@@ -37,7 +37,8 @@
             android:text="User Name"
             android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/nav_header_text_view_user_email"
@@ -46,7 +47,9 @@
             android:layout_weight="1"
             android:text="user@email.com"
             android:textAlignment="textEnd"
-            android:textSize="16sp" />
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/nav_header_text_view_user_wallet"
@@ -55,7 +58,9 @@
             android:layout_weight="1"
             android:text="wallet"
             android:textAlignment="textEnd"
-            android:textSize="16sp" />
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

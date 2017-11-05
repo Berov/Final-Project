@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.support.design.widget.NavigationView;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -18,9 +16,6 @@ import com.artgallery.Model.User;
 import com.artgallery.R;
 
 import java.io.ByteArrayOutputStream;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 /**
  * Created by Berov on 28.10.2017 г..
@@ -31,50 +26,57 @@ public class Util {
     public static int GALLERY_PERCENT = 20;
 
     public static void addGalleryMoney(double money, Context context) {
+
         User admin = DBManager.getInstance(context).getUserByID(1); //static added admins ID
         admin.setWallet(twoDecimalPlaces(admin.getWallet() + money));
         DBManager.getInstance(context).updateUser(admin);
     }
 
+
     public static double twoDecimalPlaces(double money) {
-//        DecimalFormat df = new DecimalFormat("#.##");
-//        NumberFormat.getNumberInstance(Locale.GERMAN);
-//        return Double.parseDouble(df.format(money));
 
         return (double) Math.round(money * 100) / 100;
     }
 
+
     public static int getScreenWidth() {
+
         return Resources.getSystem().getDisplayMetrics().widthPixels;
     }
 
+
     public static int getScreenHeight() {
+
         return Resources.getSystem().getDisplayMetrics().heightPixels;
     }
 
-//    public static byte[] getBytes(Bitmap bitmap) {
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
-//        return stream.toByteArray();
-//    }
 
     public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+
         return outputStream.toByteArray();
     }
 
     public static void dimBehind(PopupWindow popupWindow) {
+
         View container;
+
         if (popupWindow.getBackground() == null) {
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 container = (View) popupWindow.getContentView().getParent();
+
             } else {
                 container = popupWindow.getContentView();
             }
+
         } else {
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 container = (View) popupWindow.getContentView().getParent().getParent();
+
             } else {
                 container = (View) popupWindow.getContentView().getParent();
             }
@@ -83,17 +85,22 @@ public class Util {
         Context context = popupWindow.getContentView().getContext();
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
-        p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND; // add a flag here instead of clear others
+
+        p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         p.dimAmount = 0.5f;
         wm.updateViewLayout(container, p);
     }
 
+
     public static void hideSoftKeyboard(Activity activity) {
+
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
+
     public static void magic(Menu m, String b, boolean state) {
+
         m.findItem(R.id.graphics_linocut).setVisible(b.equals("graphics") && state);
         m.findItem(R.id.graphics_screen_printing).setVisible(b.equals("graphics") && state);
         m.findItem(R.id.graphics_etching).setVisible(b.equals("graphics") && state);

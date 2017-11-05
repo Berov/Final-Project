@@ -32,7 +32,8 @@
             android:hint="@string/mail"
             android:inputType="textAutoComplete|textEmailAddress"
             android:maxLength="30"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -47,16 +48,23 @@
             android:layout_gravity="center"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:maxLength="30" />
+            android:maxLength="30"
+            android:textStyle="bold" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/login_btn_login"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:ellipsize="marquee"
         android:text="@string/login"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/color3"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
     <Button
@@ -65,7 +73,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <!--<pl.droidsonroids.gif.GifTextView-->
         <!--android:layout_width="100dp"-->

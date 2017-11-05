@@ -292,30 +292,37 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     public ArrayList<String> getTypes() {
+
         ArrayList<String> types = new ArrayList<>();
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT type FROM Types", null);
         while (cursor.moveToNext()) {
             types.add(cursor.getString((cursor.getColumnIndex("type"))));
         }
+
         cursor.close();
         return types;
     }
 
 
     public ArrayList<String> getSubtypesByType(String type) {
+
         ArrayList<String> subtypes = new ArrayList<>();
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT subtype FROM Subtypes WHERE type_id=" + getTypeID(type), null);
+
         while (cursor.moveToNext()) {
             subtypes.add(cursor.getString(cursor.getColumnIndex("subtype")));
         }
+
         cursor.close();
         return subtypes;
     }
 
 
     private int getTypeID(String type) {
+
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT id FROM Types WHERE type =?", new String[]{type + ""});
         int id = -100;
+
         while (cursor.moveToNext()) {
             id = cursor.getInt(cursor.getColumnIndex("id"));
         }
@@ -358,34 +365,47 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     public ArrayList<Item> getItemsBySubtype(String subtype, int userID) {
-        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE subtype_id = " + getSubtypeID(subtype) + " AND owner_id !=" + userID, null);
+
+        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE subtype_id = " + getSubtypeID(subtype) +
+                " AND buyer_id = 0 AND owner_id !=" + userID, null);
+
         return getItemsByCursorQwery(cursor);
     }
 
 
     public ArrayList<Item> getAllItems(int userID) {
+
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE owner_id !=" + userID + " AND buyer_id = 0", null);
+
         return getItemsByCursorQwery(cursor);
     }
 
 
     public ArrayList<Item> getUserItems(int userID) {
+
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE owner_id =" + userID + " OR buyer_id =" + userID, null);
+
         return getItemsByCursorQwery(cursor);
     }
 
 
     public ArrayList<Item> getItemsBySearchWord(String search, int userID) {
-        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE owner_id !=" + userID + " AND (description like '%" +
+
+        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE owner_id !=" + userID +
+                " AND buyer_id = 0" +
+                " AND (description like '%" +
                 search + "%' OR title like '%" +
                 search + "%' OR author like '%" +
                 search + "%')", null);
+
         return getItemsByCursorQwery(cursor);
     }
 
 
     private ArrayList<Item> getItemsByCursorQwery(Cursor cursor) {
+
         GetItemById g = new GetItemById();
+
         return g.doInBackground(cursor);
     }
 
@@ -394,6 +414,7 @@ public class DBManager extends SQLiteOpenHelper {
 
         @Override
         protected ArrayList<Item> doInBackground(Cursor... cursors) {
+
             Cursor cursor = cursors[0];
             ArrayList<Item> items = new ArrayList<>();
             while (cursor.moveToNext()) {
@@ -413,10 +434,12 @@ public class DBManager extends SQLiteOpenHelper {
                 }
 
                 Item item = new Item(id, subtype_id, title, description, price, author, owner_id, picture, buyer_id);
+
                 items.add(item);
             }
 
             cursor.close();
+
             return items;
         }
 
@@ -439,10 +462,10 @@ public class DBManager extends SQLiteOpenHelper {
 
                 values.put("buyer_id", item.getBuyerID());
                 getWritableDatabase().update("Items", values, "id=" + item.getId(), null);
+
                 return null;
             }
+
         }.execute(item);
     }
-
-
 }

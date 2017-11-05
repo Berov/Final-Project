@@ -37,9 +37,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:text="Change Avatar"
             android:textAllCaps="false"
-            android:textSize="14sp" />
+            android:textColor="@color/color3"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -136,18 +141,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/color5"
                 android:text="Cancel"
                 android:textAllCaps="false"
-                android:textSize="14sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/profile_btn_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/color5"
                 android:text="Update"
                 android:textAllCaps="false"
-                android:textSize="14sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:background="@color/colorBright"
+    android:background="@color/color5"
 
     android:clickable="true"
     android:padding="4dp">
@@ -35,10 +35,9 @@
             <!--android:textStyle="bold|italic" />-->
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@color/colorBright"
             android:src="?android:attr/actionModeWebSearchDrawable" />
 
     </FrameLayout>
@@ -61,20 +60,25 @@
             android:layout_height="wrap_content"
             android:text="Price"
             android:textAlignment="textEnd"
-            android:textSize="16sp" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/item_row_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Title"
-            android:textSize="16sp" />
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/item_row_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 </LinearLayout>
