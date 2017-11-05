@@ -21,22 +21,22 @@ import com.artgallery.Util.Util;
 import java.util.List;
 
 /**
- * Created by Berov on 1.11.2017 г..
+ * Created by Berov on 5.11.2017 г..
  */
 
 
-public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleViewAdapter.VH> {
+public class ItemsActivityRecycleViewAdapter extends RecyclerView.Adapter<ItemsActivityRecycleViewAdapter.VH> {
 
     private List<Item> items;
     private Context context;
-    private User user;
+    private int color;
 
 
-    UserRecycleViewAdapter(Context context, List<Item> items, User user) {
+    ItemsActivityRecycleViewAdapter(Context context, List<Item> items, int color) {
 
         this.context = context;
         this.items = items;
-        this.user = user;
+        this.color = color;
     }
 
 
@@ -60,20 +60,7 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
         holder.title.setText("Title: " + item.getTitle());
         holder.price.setText("Price: " + String.valueOf(item.getPrice()));
 
-        holder.topView.setBackgroundColor(Color.argb(255, 88, 24, 69));
-
-        if (position % 2 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(255, 144, 12, 63));
-        }
-        if (position % 3 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(255, 199, 0, 57));
-        }
-        if (position % 4 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(255, 255, 87, 51));
-        }
-        if (position % 5 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(255, 255, 195, 0));
-        }
+//        holder.topView.setBackgroundColor(color);
 
         if (item.getDescription().length() < 40) {
             holder.description.setText("Description: " + item.getDescription());
@@ -85,8 +72,8 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
             @Override
             public void onClick(View view) {
 
-                Util.hideSoftKeyboard((Activity) context);
-                final AlertDialog.Builder alertDialogWantToBuy = new AlertDialog.Builder(context);
+//                Util.hideSoftKeyboard((Activity) context);
+                final AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 LinearLayout showFullItem = new LinearLayout(context);
 
                 TextView title = new TextView(context);
@@ -118,72 +105,22 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
                 showFullItem.addView(image);
                 showFullItem.addView(description);
 
-                alertDialogWantToBuy
+                alert
                         .setView(showFullItem)
-                        .setMessage("Do you want to buy this item?")
+//                        .setMessage("Do you want to buy this item?")
                         .setCancelable(true)
 
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                if (item.getPrice() < user.getWallet()) {
-
-                                    User oldOwner = DBManager.getInstance(context).getUserByID(item.getOwnerID());
-
-                                    oldOwner.setWallet(Util.twoDecimalPlaces(oldOwner.getWallet() + (item.getPrice() - item.getPrice() / 100 * Util.GALLERY_PERCENT)));
-                                    oldOwner.setSaleFlag(true);
-                                    DBManager.getInstance(context).updateUser(oldOwner);
-
-                                    Util.addGalleryMoney(item.getPrice() / 100 * Util.GALLERY_PERCENT, context);
-
-                                    item.setBuyerID(user.getId());
-                                    DBManager.getInstance(context).updateItem(item);
-
-                                    user.addItem(item);
-                                    user.setWallet(user.getWallet() - item.getPrice());
-                                    DBManager.getInstance(context).updateUser(user); //because of wallet
-
-                                    items.remove(item); //?????????????
-
-                                    BuyDialogClicked n = (BuyDialogClicked) context;
-                                    n.newWalletSum();
-
-                                    AlertDialog.Builder alertDialogBuy = new AlertDialog.Builder(context);
-                                    alertDialogBuy
-                                            .setCancelable(true)
-                                            .setMessage("Congratulations!\n\nYou just bought the \"" + item.getTitle() + "\" just for " + item.getPrice() + "€");
-                                    AlertDialog alertDialog2 = alertDialogBuy.create();
-
-                                    alertDialog2.show();
-                                } else {
-                                    AlertDialog.Builder alertDialogBuy = new AlertDialog.Builder(context);
-                                    alertDialogBuy
-                                            .setCancelable(true)
-                                            .setMessage("Sorry!\nYou have no enough money to buy this item.\nBut you can charge your wallet...");
-                                    AlertDialog alertDialog2 = alertDialogBuy.create();
-
-                                    alertDialog2.show();
-                                }
-                            }
-                        })
-
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Back", new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int id) {
                             }
                         });
 
-                AlertDialog alertDialog = alertDialogWantToBuy.create();
+                AlertDialog alertDialog = alert.create();
                 alertDialog.show();
 
             }
         });
-    }
-
-
-    public interface BuyDialogClicked {
-        public void newWalletSum();
     }
 
 
@@ -215,7 +152,7 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
             itemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Util.hideSoftKeyboard((Activity) context);
+//                    Util.hideSoftKeyboard((Activity) context);
                     itemImage.requestFocus();
                 }
             });

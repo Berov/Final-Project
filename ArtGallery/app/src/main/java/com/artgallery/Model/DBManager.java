@@ -102,7 +102,9 @@ public class DBManager extends SQLiteOpenHelper {
             "(28, 'new style', 8)," +
             "(29, 'old style', 8);";
 
+
     private static DBManager ourInstance;
+
 
     public static DBManager getInstance(Context context) {
         if (ourInstance == null) {
@@ -112,9 +114,11 @@ public class DBManager extends SQLiteOpenHelper {
         return ourInstance;
     }
 
+
     private DBManager(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -129,16 +133,20 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_PUT_SUBTYPES);
     }
 
+
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         //TODO if necessary
     }
 
+
     public void addUser(User u) {
+
         if (userExists(u.getEmail())) {
             Toast.makeText(context, "E-mail " + u.getEmail() + " already exists!", Toast.LENGTH_SHORT).show();
             return;
         }
+
         ContentValues values = new ContentValues(); //map from keys and values
         values.put("email", u.getEmail());
         values.put("password", u.getPassword());
@@ -152,22 +160,6 @@ public class DBManager extends SQLiteOpenHelper {
         Toast.makeText(context, "Registration success!", Toast.LENGTH_SHORT).show();
     }
 
-//    private static void loadUsers() {
-//        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT id, email, password, name, address, phone, isAdmin FROM Users", null);
-//        while (cursor.moveToNext()) {
-//            String email = cursor.getString(cursor.getColumnIndex("email"));
-//            String password = cursor.getString(cursor.getColumnIndex("password"));
-//            String name = cursor.getString(cursor.getColumnIndex("name"));
-//            String address = cursor.getString(cursor.getColumnIndex("address"));
-//            String phone = cursor.getString(cursor.getColumnIndex("phone"));
-//
-//            User u = new User(name, email, password, phone, address);
-//
-//            u.setId(cursor.getInt(cursor.getColumnIndex("id")));
-//            u.setAdmin(cursor.getInt(cursor.getColumnIndex("isAdmin")) == 1);
-//        }
-//        cursor.close();
-//    }
 
     public void updateUser(User u) {
         ContentValues values = new ContentValues();
@@ -186,9 +178,11 @@ public class DBManager extends SQLiteOpenHelper {
         getWritableDatabase().update("Users", values, "id=" + u.getId(), null);
     }
 
+
     public void deleteUser(User u) {
         //TODO later
     }
+
 
     public boolean isValidLogin(String email, String password) {
         boolean valid = false;
@@ -207,6 +201,7 @@ public class DBManager extends SQLiteOpenHelper {
         return valid;
     }
 
+
     public boolean userExists(String newEmail) {
 
         boolean exists = false;
@@ -224,8 +219,8 @@ public class DBManager extends SQLiteOpenHelper {
         return exists;
     }
 
+
     public User getUser(String enteringEmail, String enteringPassword) {
-//        User registeredUser = null;
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT  id, email, password FROM Users", null);
         Integer id = null;
 
@@ -241,32 +236,6 @@ public class DBManager extends SQLiteOpenHelper {
 
         cursor.close();
         return getUserByID(id);
-//
-//        cursor = ourInstance.getWritableDatabase().rawQuery("SELECT email, password, name, address, phone,image,wallet, isAdmin FROM Users WHERE id=?", new String[]{id + ""});
-//
-//        if (cursor.getCount() > 0) {
-//            cursor.moveToFirst();
-//        }
-//
-//        String name = cursor.getString(cursor.getColumnIndex("name"));
-//        double wallet = cursor.getDouble(cursor.getColumnIndex("wallet"));
-//        String email = cursor.getString(cursor.getColumnIndex("email"));
-//        String password = cursor.getString(cursor.getColumnIndex("password"));
-//        String phone = cursor.getString(cursor.getColumnIndex("phone"));
-//        String address = cursor.getString(cursor.getColumnIndex("address"));
-//        byte[] image = cursor.getBlob(cursor.getColumnIndex("image"));
-//        int flagSold = cursor.getInt(cursor.getColumnIndex("flag_sold"));
-//
-//        registeredUser = new User(name, email, password, phone, address, wallet, flagSold);
-//        registeredUser.setId(id);
-//        registeredUser.setUserImageBytes(image);
-//
-//        if (cursor.getInt(cursor.getColumnIndex("isAdmin")) == 1) {
-//            registeredUser.setAdmin(true);
-//        }
-//
-//        cursor.close();
-//        return registeredUser;
     }
 
 
@@ -318,35 +287,9 @@ public class DBManager extends SQLiteOpenHelper {
 
         long id = getWritableDatabase().insert("Items", null, values);
         item.setId((int) id);
-
-//        Toast.makeText(context, "An Item is uploaded\n" +
-//                "title: " + item.getTitle() + "\n" +
-//                "description: " + item.getDescription() + "\n" +
-//                "price: " + item.getPrice() + "\n" +
-//                "author: " + item.getAuthor() + "\n" +
-//                "owner id: " + +item.getOwnerID() + "\n" +
-//                "", Toast.LENGTH_SHORT).show();
-
         return (int) id;
     }
 
-    private static void loadItems() {
-//        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT id, title, description, price, author, owner_id, user_id picture FROM Items", null);
-//        while (cursor.moveToNext()) {
-//            String title = cursor.getString(cursor.getColumnIndex("title"));
-//            String description = cursor.getString(cursor.getColumnIndex("description"));
-//            Double price = cursor.getDouble(cursor.getColumnIndex("price"));
-//            String author = cursor.getString(cursor.getColumnIndex("author"));
-//            Integer owner_id = cursor.getInt(cursor.getColumnIndex("owner_id"));
-//            Integer user_id = cursor.getInt(cursor.getColumnIndex("user_id"));
-//            byte[] picture = cursor.getBlob(cursor.getColumnIndex("picture"));
-//
-//            Item item = new Item(user_id, title, description, price, author, owner_id, picture);
-//            item.setId(cursor.getInt(cursor.getColumnIndex("id")));
-//            itemsAdd.add(item);
-//        }
-//        cursor.close();
-    }
 
     public ArrayList<String> getTypes() {
         ArrayList<String> types = new ArrayList<>();
@@ -358,6 +301,7 @@ public class DBManager extends SQLiteOpenHelper {
         return types;
     }
 
+
     public ArrayList<String> getSubtypesByType(String type) {
         ArrayList<String> subtypes = new ArrayList<>();
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT subtype FROM Subtypes WHERE type_id=" + getTypeID(type), null);
@@ -368,6 +312,7 @@ public class DBManager extends SQLiteOpenHelper {
         return subtypes;
     }
 
+
     private int getTypeID(String type) {
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT id FROM Types WHERE type =?", new String[]{type + ""});
         int id = -100;
@@ -377,6 +322,7 @@ public class DBManager extends SQLiteOpenHelper {
         cursor.close();
         return id;
     }
+
 
     public int getSubtypeID(String subtype) {
 
@@ -391,12 +337,14 @@ public class DBManager extends SQLiteOpenHelper {
         return id;
     }
 
+
     public void updateUserWallet(User user, double transfer) {
 
         ContentValues values = new ContentValues();
         values.put("wallet", transfer);
         getWritableDatabase().update("Users", values, "id=" + user.getId(), null);
     }
+
 
     public double getUserWallet(int userID) {
 
@@ -408,20 +356,24 @@ public class DBManager extends SQLiteOpenHelper {
         return money;
     }
 
+
     public ArrayList<Item> getItemsBySubtype(String subtype, int userID) {
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE subtype_id = " + getSubtypeID(subtype) + " AND owner_id !=" + userID, null);
         return getItemsByCursorQwery(cursor);
     }
 
+
     public ArrayList<Item> getAllItems(int userID) {
-        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE owner_id !=" + userID, null);
+        Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE owner_id !=" + userID + " AND buyer_id = 0", null);
         return getItemsByCursorQwery(cursor);
     }
+
 
     public ArrayList<Item> getUserItems(int userID) {
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE owner_id =" + userID + " OR buyer_id =" + userID, null);
         return getItemsByCursorQwery(cursor);
     }
+
 
     public ArrayList<Item> getItemsBySearchWord(String search, int userID) {
         Cursor cursor = ourInstance.getWritableDatabase().rawQuery("SELECT * FROM Items WHERE owner_id !=" + userID + " AND (description like '%" +
@@ -433,37 +385,10 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     private ArrayList<Item> getItemsByCursorQwery(Cursor cursor) {
-//
-//        ArrayList<Item> items = new ArrayList<>();
-//        while (cursor.moveToNext()) {
-//
-//            int id = cursor.getInt(cursor.getColumnIndex("id"));
-//            String title = cursor.getString(cursor.getColumnIndex("title"));
-//            double price = cursor.getDouble(cursor.getColumnIndex("price"));
-//            String description = cursor.getString(cursor.getColumnIndex("description"));
-//            byte[] picture = cursor.getBlob(cursor.getColumnIndex("picture"));
-//            int owner_id = cursor.getInt(cursor.getColumnIndex("owner_id"));
-//            int subtype_id = cursor.getInt(cursor.getColumnIndex("subtype_id"));
-//            String author = "";
-//
-//            if (cursor.getString(cursor.getColumnIndex("author")) != null) {
-//                author = cursor.getString(cursor.getColumnIndex("author"));
-//            }
-//
-//            Item item = new Item(id, subtype_id, title, description, price, author, owner_id, picture);
-//            items.add(item);
-//        }
-//
-//        cursor.close();
-//        return items;
-
         GetItemById g = new GetItemById();
-
         return g.doInBackground(cursor);
-
     }
 
-//TODO refactoring!!!
 
     private class GetItemById extends AsyncTask<Cursor, Void, ArrayList<Item>> {
 
@@ -510,18 +435,13 @@ public class DBManager extends SQLiteOpenHelper {
             protected Void doInBackground(Item... items) {
                 Item item = items[0];
                 ContentValues values = new ContentValues();
-                values.put("owner_id", item.getOwnerID());
+
+
+                values.put("buyer_id", item.getBuyerID());
                 getWritableDatabase().update("Items", values, "id=" + item.getId(), null);
                 return null;
             }
         }.execute(item);
-    }
-
-
-    public void soldSeen(int ownerID) {// ??????????????????????????????????????????????????????????????????
-        ContentValues values = new ContentValues();
-        values.put("flag_sold", 0);
-        getWritableDatabase().update("Users", values, "id=" + ownerID, null);
     }
 
 

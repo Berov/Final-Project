@@ -61,6 +61,7 @@ public class UserActivity extends AppCompatActivity
     private LayoutInflater layoutInflater;
     private View topView;
     private RecyclerView recyclerView;
+   private  ArrayList<Item> items;
 //    private Drawable itemSoldIcon;  TODO
 
     @Override
@@ -168,6 +169,8 @@ public class UserActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
+
+        getAllItems();
 
         userName.setText(user.getName());
         userWallet.setText(getString(R.string.wallet) + String.valueOf(user.getWallet()) + getString(R.string.money));
@@ -450,7 +453,7 @@ public class UserActivity extends AppCompatActivity
 
     private void getItemBySubtype(String subtype) {
 
-        ArrayList<Item> items = DBManager.getInstance(this).getItemsBySubtype(subtype, user.getId());
+        items = DBManager.getInstance(this).getItemsBySubtype(subtype, user.getId());
 
         if (items.size() == 0 || items.isEmpty()) {
             wellcome.setVisibility(View.VISIBLE);
@@ -459,13 +462,13 @@ public class UserActivity extends AppCompatActivity
             setRecyclerViewVisible();
         }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
 
     private void getAllItems() {
-        ArrayList<Item> items = DBManager.getInstance(this).getAllItems(user.getId());
+        items = DBManager.getInstance(this).getAllItems(user.getId());
 
         if (items.size() == 0 || items.isEmpty()) {
             wellcome.setVisibility(View.VISIBLE);
@@ -474,13 +477,13 @@ public class UserActivity extends AppCompatActivity
             setRecyclerViewVisible();
         }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
 
     private void getItemsBySearchWord(String search) {
-        ArrayList<Item> items = DBManager.getInstance(this).getItemsBySearchWord(search, user.getId());
+        items = DBManager.getInstance(this).getItemsBySearchWord(search, user.getId());
 
         if (items.size() == 0 || items.isEmpty()) {
             wellcome.setVisibility(View.VISIBLE);
@@ -489,14 +492,17 @@ public class UserActivity extends AppCompatActivity
             setRecyclerViewVisible();
         }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
 
     private void setRecyclerViewVisible() {
         recyclerView.setVisibility(View.VISIBLE);
         wellcome.setVisibility(View.GONE);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new UserRecycleViewAdapter(this, items, user));
     }
 
 

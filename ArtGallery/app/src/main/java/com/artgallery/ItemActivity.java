@@ -32,21 +32,11 @@ public class ItemActivity extends AppCompatActivity {
     private Fragment fragmentSold = new SoldItemsFragment();
     private Fragment fragmentBought = new BoughtItemsFragment();
     public static final int GALLERY_REQUEST = 30;
-
-
-    //    private EditText txtTitle, txtPrice, txtDesc, txtAuthor;
-//    //
-//    private Spinner spKind, spType;
-//    private String type, subtype;
-//    private ImageView imgPreview;
-//    private int userID;
-//    private double price;
-//
-//    private boolean isTitleTrue, isDescTrue, isAuthorTrue, isPriceTrue = false;
-//    private boolean imageChanged = false;
-//    private byte[] bytes;
     public static User user;
-    public static ArrayList<Item> itemsForSale;
+    public static ArrayList<Item> itemsForSale = new ArrayList<>();
+    public static ArrayList<Item> soldItems= new ArrayList<>();
+    public static ArrayList<Item> boughtItems= new ArrayList<>();
+
     ArrayAdapter<CharSequence> arrTypesAdapter;
 
 
@@ -84,7 +74,8 @@ public class ItemActivity extends AppCompatActivity {
 
 //        user = (User) getIntent().getSerializableExtra("USER");
         itemsForSale = user.getItemsForSale();
-
+        soldItems = user.getSoldItems();
+        boughtItems = user.getBoughtItems();
 
         arrTypesAdapter = ArrayAdapter.createFromResource(ItemActivity.this, R.array.itemTypes, android.R.layout.simple_spinner_item);
         arrTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
