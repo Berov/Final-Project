@@ -59,7 +59,7 @@ public class DBManager extends SQLiteOpenHelper {
             ");";
 
     private static final String SQL_PUT_ADMIN = "INSERT INTO Users ('email', 'password', 'name', 'address', 'phone', 'isAdmin')" +
-            "VALUES ('berov@ittalents.bg', 'qwerty', 'Berov', 'Sofia, Bulgaria, Infinity Tower, floor 14', '+359885107407', 1 );";
+            "VALUES ('admin@ittalents.bg', 'admin', 'Berov', 'Sofia, Bulgaria, Infinity Tower, floor 14', '+359885107407', 1 );";
 
     private static final String SQL_PUT_TYPES = "INSERT INTO Types('id', 'type') VALUES" +
             "(1, 'graphics')," +

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.artgallery.Model.DBManager;
 import com.artgallery.Model.User;
 import com.artgallery.Util.Util;
+import com.artgallery.Util.Validator;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -102,20 +103,23 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                user.setName(name.getText().toString());
-                user.setAddress(address.getText().toString());
-                user.setPassword(password.getText().toString());
-                user.setPhoneNumber(phone.getText().toString());
+                if (isUserDataValid()) {
 
-                DBManager.getInstance(ProfileActivity.this).updateUser(user);
+                    user.setName(name.getText().toString());
+                    user.setAddress(address.getText().toString());
+                    user.setPassword(password.getText().toString());
+                    user.setPhoneNumber(phone.getText().toString());
 
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("USER", user);
-                intent.putExtras(bundle);
+                    DBManager.getInstance(ProfileActivity.this).updateUser(user);
 
-                setResult(RESULT_OK, intent);
-                finish();
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("USER", user);
+                    intent.putExtras(bundle);
+
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
 
@@ -187,5 +191,43 @@ public class ProfileActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private boolean isUserDataValid() {
+
+        boolean isValid = true;
+
+        if (!Validator.isValidPhoneNumber(phone.getText().toString())) {
+            phone.setError(getString(R.string.phoneConditions));
+            isValid = false;
+            phone.requestFocus();
+        }
+
+        if (!password.getText().toString().matches(confirm.getText().toString())) {
+            confirm.setError(getString(R.string.invalidPasswordConfirmation));
+            isValid = false;
+            confirm.requestFocus();
+        }
+
+        if (!Validator.isValidPassword(password.getText().toString())) {
+            password.setError(getString(R.string.passwordConditions));
+            isValid = false;
+            password.requestFocus();
+        }
+
+        if (address.getText().toString().isEmpty()) {
+            address.setError(getString(R.string.addAddress));
+            isValid = false;
+            address.requestFocus();
+        }
+
+        if (!Validator.isValidName(name.getText().toString())) {
+            name.setError(getString(R.string.enterName));
+            isValid = false;
+            name.requestFocus();
+        }
+
+        return isValid;
     }
 }

@@ -3,7 +3,7 @@
     android:id="@+id/profile_top_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="16dp"
+    android:layout_marginTop="0dp"
     android:clickable="true"
     android:focusable="true">
 
@@ -38,8 +38,6 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:backgroundTint="@color/colorPrimary"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:text="Change Avatar"
             android:textAllCaps="false"
             android:textColor="@color/color3"
@@ -60,7 +58,7 @@
                 android:inputType="textCapWords"
                 android:maxLength="15"
                 android:maxLines="1"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -77,7 +75,7 @@
                 android:inputType="textCapWords"
                 android:maxLength="40"
                 android:maxLines="1"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -94,7 +92,7 @@
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:maxLines="1"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -111,7 +109,7 @@
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:maxLines="1"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -128,7 +126,7 @@
                 android:inputType="number"
                 android:maxLength="20"
                 android:maxLines="1"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
@@ -161,6 +159,5 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>

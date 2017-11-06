@@ -3,7 +3,6 @@ package com.artgallery;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,9 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.artgallery.Model.DBManager;
 import com.artgallery.Model.Item;
-import com.artgallery.Model.User;
 import com.artgallery.Util.Util;
 
 import java.util.List;
@@ -107,7 +104,6 @@ public class ItemsActivityRecycleViewAdapter extends RecyclerView.Adapter<ItemsA
 
                 alert
                         .setView(showFullItem)
-//                        .setMessage("Do you want to buy this item?")
                         .setCancelable(true)
 
                         .setNegativeButton("Back", new DialogInterface.OnClickListener() {
@@ -152,7 +148,6 @@ public class ItemsActivityRecycleViewAdapter extends RecyclerView.Adapter<ItemsA
             itemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Util.hideSoftKeyboard((Activity) context);
                     itemImage.requestFocus();
                 }
             });

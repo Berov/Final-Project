@@ -60,20 +60,30 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
         holder.title.setText("Title: " + item.getTitle());
         holder.price.setText("Price: " + String.valueOf(item.getPrice()));
 
-        holder.topView.setBackgroundColor(Color.argb(128, 88, 24, 69));
+        holder.topView.setBackgroundColor(Color.argb(64, 255, 0, 0));
 
         if (position % 2 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(128, 144, 12, 63));
+            holder.topView.setBackgroundColor(Color.argb(64, 255, 156, 0));
         }
         if (position % 3 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(128, 199, 0, 57));
+            holder.topView.setBackgroundColor(Color.argb(16428, 255, 255, 0));
         }
         if (position % 4 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(128, 255, 87, 51));
+            holder.topView.setBackgroundColor(Color.argb(64, 60, 241, 14));
         }
         if (position % 5 == 0) {
-            holder.topView.setBackgroundColor(Color.argb(128, 255, 195, 0));
+            holder.topView.setBackgroundColor(Color.argb(64, 2, 255, 230));
         }
+        if (position % 6 == 0) {
+            holder.topView.setBackgroundColor(Color.argb(64, 0, 36, 255));
+        }
+        if (position % 7 == 0) {
+            holder.topView.setBackgroundColor(Color.argb(64, 197, 0, 255));
+        }
+        if (position % 8 == 0) {
+            holder.topView.setBackgroundColor(Color.argb(64, 255, 0, 156));
+        }
+
 
         if (item.getDescription().length() < 40) {
             holder.description.setText("Description: " + item.getDescription());
@@ -145,7 +155,7 @@ public class UserRecycleViewAdapter extends RecyclerView.Adapter<UserRecycleView
                                     user.setWallet(user.getWallet() - item.getPrice());
                                     DBManager.getInstance(context).updateUser(user); //because of wallet
 
-                                    items.remove(item); //?????????????
+                                    items.remove(item);
 
                                     BuyDialogClicked n = (BuyDialogClicked) context;
                                     n.newWalletSum();

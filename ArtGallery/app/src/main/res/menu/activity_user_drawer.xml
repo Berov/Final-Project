@@ -3,7 +3,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/category_graphics"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_create_black_24dp"
             android:title="Graphics" />
         <item
             android:id="@+id/graphics_linocut"
@@ -21,7 +21,7 @@
 
         <item
             android:id="@+id/category_painting"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_palette_black_24dp"
             android:title="Painting" />
         <item
             android:id="@+id/painting_aquarelle"
@@ -51,7 +51,7 @@
 
         <item
             android:id="@+id/category_sculpture"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_person_black_24dp"
             android:title="Sculpture" />
         <item
             android:id="@+id/sculpture_stone"
@@ -69,7 +69,7 @@
 
         <item
             android:id="@+id/category_wood_carving"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_filter_vintage_black_24dp"
             android:title="Wood Carving" />
         <item
             android:id="@+id/wood_carving_classic"
@@ -91,7 +91,7 @@
 
         <item
             android:id="@+id/category_ceramics"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_brush_black_24dp"
             android:title="Ceramics" />
         <item
             android:id="@+id/ceramics_wall_panel"
@@ -109,7 +109,7 @@
 
         <item
             android:id="@+id/category_glassware"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_local_bar_black_24dp"
             android:title="Glassware" />
         <item
             android:id="@+id/glassware_stained_glass"
@@ -131,7 +131,7 @@
 
         <item
             android:id="@+id/category_textiles"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_content_cut_black_24dp"
             android:title="Textiles" />
         <item
             android:id="@+id/textiles_clothes"
@@ -153,7 +153,7 @@
 
         <item
             android:id="@+id/category_iconography"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_person_black_24dp"
             android:title="Iconography" />
         <item
             android:id="@+id/iconography_new_style"
@@ -165,68 +165,5 @@
             android:visible="false" />
 
 
-        <!--<item-->
-        <!--android:id="@+id/nav_posts"-->
-        <!--android:icon="@drawable/ic_menu_camera"-->
-        <!--android:title="Posts" />-->
-
-        <!--<item-->
-        <!--android:id="@+id/nav_class"-->
-        <!--android:title="Class"-->
-        <!--android:visible="false" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_dept"-->
-        <!--android:title="Department"-->
-        <!--android:visible="false" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_batch"-->
-        <!--android:title="Batch"-->
-        <!--android:visible="false" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_campus"-->
-        <!--android:title="Campus"-->
-        <!--android:visible="false" />-->
-
-
-        <!--<item-->
-        <!--android:id="@+id/nav_walls"-->
-        <!--android:icon="@drawable/ic_menu_gallery"-->
-        <!--android:title="Walls" />-->
-
-        <!--<item-->
-        <!--android:id="@+id/nav_wall_news"-->
-        <!--android:title="News"-->
-        <!--android:visible="false" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_wall_events"-->
-        <!--android:title="Events"-->
-        <!--android:visible="false" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_wall_fun"-->
-        <!--android:title="Fun"-->
-        <!--android:visible="false" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_wall_hadith"-->
-        <!--android:title="Hadith"-->
-        <!--android:visible="false" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_wall_Poetry"-->
-        <!--android:title="Poetry"-->
-        <!--android:visible="false" />-->
-
-
-        <!--<item-->
-        <!--android:id="@+id/nav_com"-->
-        <!--android:title="Communicate">-->
-        <!--<menu>-->
-        <!--<item-->
-        <!--android:id="@+id/nav_share"-->
-        <!--android:title="Share" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_send"-->
-        <!--android:icon="@drawable/ic_menu_send"-->
-        <!--android:title="Send" />-->
-        <!--</menu>-->
-        <!--</item>-->
     </group>
 </menu>

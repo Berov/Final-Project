@@ -27,15 +27,18 @@
                 android:layout_marginTop="8dp"
                 android:text="Account Registration"
                 android:textAlignment="textStart"
+                android:textColor="?android:attr/textColorTertiary"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="In order to list a work in the Gallery or to make a purchase through the Application, you must first create an Account by completing our registration process. During the registration process you will be required to provide certain information and you will establish an email and a password. Upon completion of our registration process will become a User Member. You agree to provide accurate, current and complete information during the registration process and to update such information to keep it accurate, current and complete. "
-                android:textAlignment="viewStart" />
+                android:textAlignment="viewStart"
+                android:textColor="?android:attr/textColorTertiary" />
 
 
             <TextView
@@ -44,6 +47,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Seller Terms and Conditions \nListing Works on the Gallery app"
+                android:textColor="?android:attr/textColorTertiary"
                 android:textStyle="bold" />
 
             <TextView
@@ -52,7 +56,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="As a User Member, you may submit listings for original works of art Original Works of Art that you have created and that you desire to sell through the Services, or submit listings for Original Works of Art that were created by another artist. In order for your listings to be accepted, you must provide the Gallery with all the information requested on the applicable page of our App. Gallery reserves the right to edit any listings to ensure that they comply with the Gallery rules."
-                android:textAlignment="viewStart" />
+                android:textAlignment="viewStart"
+                android:textColor="?android:attr/textColorTertiary" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -61,6 +66,7 @@
                 android:layout_marginTop="8dp"
                 android:text="Responsibility for Works"
                 android:textAlignment="textStart"
+                android:textColor="?android:attr/textColorTertiary"
                 android:textStyle="bold" />
 
             <TextView
@@ -68,12 +74,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:textColor="?android:attr/textColorTertiary"
                 android:text="You acknowledge and agree that you are solely responsible for all Original Works of Art that you make available through the Services. Accordingly, you represent and warrant that: as to Original Works of Art that you make available through the Services, you are the creator of all such Original Works of Arts or you are the owner of such Original Works of Art."
                 android:textAlignment="viewStart" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorTertiary"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Purchaser Terms and Conditions \nPurchases of Original Works of Art"
@@ -81,16 +89,19 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="As a User Member, you may purchase Original Works of Art that are listed by other User Members on the Site. When you purchase such an Original Work of Art through Services, you are purchasing the work from the User Member identified on the listing for such work. Prices for Original Works of Art will be as specified on the applicable listing. Applicable Taxes will be defined below. The Member identified on the listing of the Original Work of Art will ship the purchased work directly to you."
-                android:textAlignment="viewStart" />
+                android:textAlignment="viewStart"
+                android:textColor="?android:attr/textColorTertiary" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorTertiary"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Terms for both Sellers and Purchasers \nTransaction Restrictions"
@@ -100,6 +111,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorTertiary"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="If you are a User Member and have submitted a listing for an Original Work of Art and have been contacted through the Services by another User Member with respect to purchasing either of the foregoing, you may not sell such Original Work of Art to such User Member independent of the Services. Similarly, if you are a Member and desire to purchase an Original Work of Art for which another Member has submitted a listing, you may not purchase such Original Work of Art from such Member independent of the Services."
@@ -108,6 +120,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorTertiary"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Taxes"
@@ -117,6 +130,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorTertiary"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="All prices and commissions referred to in these Terms, including any prices, commissions forth on the App, are stated in U.S. dollars and include value added VAT. The Gallery commissions is the amount equivalent of 20 percent of the sale price. If you are a seller of Original Works, you acknowledge that the Gallery will withhold the Taxes required to be withheld from the payments the Gallery makes to you. If you are a purchaser of Original Works, you acknowledge that the Gallery will add Taxes to the amounts charged, as a separate charge, when required or when allowed to do so. Each party will be responsible for complying with any and all obligations imposed on it under applicable law with respect to the collection and payment of any Taxes."
@@ -125,6 +139,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorTertiary"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="YOU ACKNOWLEDGE AND AGREE THAT, BY ACCESSING OR USING THE SERVICES OR BY SELLING OR PURCHASING A WORK ON OR BY POSTING ANY CONTENT ON THE APP, YOU ARE INDICATING THAT YOU HAVE READ, UNDERSTAND AND AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE TO THESE TERMS, THEN YOU HAVE NO RIGHT TO ACCESS OR USE THE SERVICES."
@@ -137,11 +152,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"
+                android:backgroundTint="@color/color3"
                 android:text="Agree"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

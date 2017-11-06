@@ -114,13 +114,6 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
 
-        <!--<Button-->
-        <!--android:id="@+id/wallet_btn_withdraw"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="Withdraw"-->
-        <!--android:textAllCaps="false" />-->
     </LinearLayout>
 
     <LinearLayout

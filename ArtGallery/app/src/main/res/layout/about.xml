@@ -11,14 +11,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!--<ScrollView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical">-->
 
     <TextView
         android:layout_width="match_parent"
@@ -34,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="@string/author_nikolai_berov"
+        android:textColor="?android:attr/textColorTertiary"
         android:textSize="14sp"
         android:textStyle="italic" />
 
@@ -42,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="@string/about_the_project_this_is_the_final_project_in_it_talents_training_camp"
+        android:textColor="?android:attr/textColorTertiary"
         android:textSize="14sp"
         android:textStyle="italic" />
 
@@ -50,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="@string/bulgaria_sofia"
+        android:textColor="?android:attr/textColorTertiary"
         android:textSize="14sp"
         android:textStyle="italic" />
 
@@ -61,20 +56,21 @@
         android:autoLink="email"
         android:text="@string/nikolai_berov_gmail_com"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:gravity="center"
-    android:layout_height="wrap_content">
-
-    <pl.droidsonroids.gif.GifTextView
-        android:id="@+id/banana"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gif" />
-</LinearLayout>
+        android:gravity="center">
+
+        <pl.droidsonroids.gif.GifTextView
+            android:id="@+id/banana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gif" />
+    </LinearLayout>
 
 
     <TextView
@@ -87,7 +83,4 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-
-    <!--</LinearLayout>-->
-    <!--</ScrollView>-->
 </LinearLayout>

@@ -63,7 +63,7 @@ public class ItemActivity extends AppCompatActivity {
         Toast.makeText(this, "User - " + user.getName(), Toast.LENGTH_SHORT).show();
 
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_photo_black_24dp);
-        DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.white));//TODO bind it with the Theme
+        DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.white)); //TODO bind it with the Theme
         user.setSaleFlag(false);
         DBManager.getInstance(this).updateUser(user);
 
